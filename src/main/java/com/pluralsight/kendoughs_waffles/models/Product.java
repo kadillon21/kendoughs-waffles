@@ -11,7 +11,17 @@ public abstract class Product implements Printable {
     private int id;
 
     private String name;
-    private int price;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // For JPA (no arguments constructor)
+    public Product() {
+
+    }
 
     public String getName() {
         return name;

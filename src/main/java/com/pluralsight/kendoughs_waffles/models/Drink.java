@@ -17,6 +17,19 @@ public class Drink extends Product{
     private int stockCount;
     private boolean isAvailable;
 
+    // For JPA (no arguments constructor)
+    protected Drink() {
+        super();
+    }
+
+    public Drink(double price, DrinkFlavor flavor, DrinkSize size, int stockCount, boolean isAvailable) {
+        super(flavor.getLabel(), price);
+        this.flavor = flavor;
+        this.size = size;
+        this.stockCount = stockCount;
+        this.isAvailable = isAvailable;
+    }
+
     @Override
     public void printDetails() {
 
