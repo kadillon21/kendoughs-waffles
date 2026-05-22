@@ -16,4 +16,8 @@ public enum WaffleSize {
     public String getLabel() {
         return label;
     }
+
+    public double getBasePrice() {
+        return basePrice;
+    }
 }
