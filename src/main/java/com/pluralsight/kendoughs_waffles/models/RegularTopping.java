@@ -1,4 +1,6 @@
 package com.pluralsight.kendoughs_waffles.models;
 
-public class RegularTopping {
+public class RegularTopping extends Topping{
+
+
 }
