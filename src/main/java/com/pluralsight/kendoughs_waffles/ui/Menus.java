@@ -62,12 +62,64 @@ public class Menus {
     }
 
     public static void customWaffleMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "       Build Your Waffle         " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Step 1: Choose a Base" + R + "           " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Classic          " + A + "$4.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Belgian          " + A + "$5.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Liege            " + A + "$5.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Churro           " + A + "$5.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Red Velvet       " + A + "$6.49" + R + "       " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Step 2: Choose a Size" + R + "           " + B + "║");
+        System.out.println(B + "║  " + A + "6" + R + ")  Mini             " + A + "+$0.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "7" + R + ")  Regular          " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "8" + R + ")  Large            " + A + "+$2.00" + R + "      " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Step 3: Add Toppings" + R + "            " + B + "║");
+        System.out.println(B + "║  " + A + "9" + R + ")  Regular Toppings " + A + "+$0.50" + R + "     " + B + "║");
+        System.out.println(B + "║  " + A + "10" + R + ") Premium Toppings  " + A + "+$1.00" + R + "     " + B + "║");
+        System.out.println(B + "║  " + A + "11" + R + ") Stuffed Option    " + A + "+$1.50" + R + "     " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "C" + R + ")  Confirm Waffle             " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
     public static void drinkMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "           Drink Menu            " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Coffee           " + A + "$2.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Orange Juice     " + A + "$2.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Milk             " + A + "$1.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Lemonade         " + A + "$2.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Apple Juice      " + A + "$2.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "6" + R + ")  Cranberry Juice  " + A + "$2.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
     public static void sideMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "            Side Menu            " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Hash Browns      " + A + "$2.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Waffle Fries     " + A + "$3.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Bacon            " + A + "$2.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Fruit Cup        " + A + "$2.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
     public static void checkoutMenu(Order order) {
@@ -166,5 +218,37 @@ public class Menus {
         System.out.println(B + "╚══════════════════════════════════════════════╝" + R);
     }
 
+    public static void removeItemMenu(Order order) {
+        List<Product> products = order.getProducts();
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "          Remove Item            " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  Enter the number of the item   " + B + "║");
+        System.out.println(B + "║  you'd like to remove.          " + B + "║");
+        for (Product product : products){
+            System.out.println(B + "║  " + A + "1" + R + ") " + product.getName() + " - $" + product.getPrice() + B + "          ║");
+        }
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
 
+    public static void viewCurrentOrder(Order order) {
+        List<Product> products = order.getProducts();
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "         Current Order           " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        for (Product product : products){
+            System.out.println(B + "║  " + R + product.getName() + " - $" + product.getPrice() + B + "          ║");
+        }
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
 }
