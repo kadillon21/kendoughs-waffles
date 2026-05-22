@@ -17,5 +17,15 @@ public abstract class Topping {
     private int stockCount;
     private boolean isAvailable;
 
+    public Topping(ToppingName name, double price, int stockCount, boolean isAvailable) {
+        this.price = price;
+        this.stockCount = stockCount;
+        this.isAvailable = isAvailable;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     public abstract double getExtraCost();
 }
