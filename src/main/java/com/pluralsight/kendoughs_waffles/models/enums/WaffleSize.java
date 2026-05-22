@@ -6,18 +6,18 @@ public enum WaffleSize {
     LARGE("Large", 9.00);
 
     private final String label;
-    private final double basePrice;
+    private final double price;
 
     WaffleSize(String label, double basePrice) {
         this.label = label;
-        this.basePrice = basePrice;
+        this.price = basePrice;
     }
 
     public String getLabel() {
         return label;
     }
 
-    public double getBasePrice() {
-        return basePrice;
+    public double getPrice() {
+        return price;
     }
 }
