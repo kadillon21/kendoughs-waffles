@@ -251,4 +251,10 @@ public class Menus {
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
+
+    public static void dailySpecialMenu() {
+    }
+
+    public static void signatureWaffleMenu() {
+    }
 }

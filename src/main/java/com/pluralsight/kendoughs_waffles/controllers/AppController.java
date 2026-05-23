@@ -51,9 +51,9 @@ public class AppController {
             Menus.orderMenu();
             Order order = new Order(1, "Kendall", "kadillon21@gmail.com", "773-383-8814", new ArrayList<>());
             switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
-                case '1' -> handleWaffleMenu();
-                case '2' -> handleDrinkMenu();
-                case '3' -> handleSideMenu();
+                case '1' -> handleWaffleMenu(order);
+                case '2' -> handleDrinkMenu(order);
+                case '3' -> handleSideMenu(order);
                 case '4' -> handleViewCurrentOrder(order);
                 case '5' -> handleRemoveItemMenu(order);
                 case '6' -> handleCheckoutMenu(order);
@@ -62,26 +62,55 @@ public class AppController {
         }
     }
 
-    private void handleWaffleMenu() {
+    private void handleWaffleMenu(Order order) {
         boolean onWaffleMenu = true;
         while(onWaffleMenu) {
             Menus.waffleMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
-                case '1' -> handleCustomWaffleMenu();
-                case '2' -> handleSignatureWaffleMenu();
-                case '3' -> handleDailySpecial();
+                case '1' -> handleCustomWaffleMenu(order);
+                case '2' -> handleSignatureWaffleMenu(order);
+                case '3' -> handleDailySpecial(order);
                 case 'X' -> onWaffleMenu = false;
             }
         }
     }
 
-    private void handleDailySpecial() {
+    private void handleDailySpecial(Order order) {
+        boolean onDailySpecial = true;
+        while (onDailySpecial){
+            Menus.dailySpecialMenu();
+            switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
+                case '1' -> ;
+                case 'X' -> onDailySpecial = false;
+            }
+        }
     }
 
-    private void handleSignatureWaffleMenu() {
+    private void handleSignatureWaffleMenu(Order order) {
+        boolean onSignatureWaffleMenu = true;
+        while (onSignatureWaffleMenu){
+            Menus.signatureWaffleMenu();
+            switch (UserInput.promptForChar("What would you like to do? ", "1X")){
+                case '1' -> ;
+                case 'X' -> onSignatureWaffleMenu = false;
+            }
+        }
     }
 
-    private void handleCustomWaffleMenu() {
+    private void handleCustomWaffleMenu(Order order) {
+        boolean onCustomWaffleMenu = true;
+        while (onCustomWaffleMenu){
+            Menus.customWaffleMenu();
+            switch(UserInput.promptForChar("What would you like to do? ", "123456X")){
+                case '1' -> ;
+                case '2' -> ;
+                case '3' -> ;
+                case '4' -> ;
+                case '5' -> ;
+                case '6' -> ;
+                case 'X' -> onCustomWaffleMenu = false;
+            }
+        }
     }
 
     private void handleDrinkMenu(Order order) {
@@ -95,11 +124,12 @@ public class AppController {
                 case '4' -> ;
                 case '5' -> ;
                 case '6' -> ;
+                case 'X' -> onDrinkMenu = false;
             }
         }
     }
 
-    private void handleSideMenu() {
+    private void handleSideMenu(Order order) {
         boolean onSideMenu = true;
         while(onSideMenu) {
             Menus.sideMenu();
@@ -108,6 +138,7 @@ public class AppController {
                 case '2' -> ;
                 case '3' -> ;
                 case '4' -> ;
+                case 'X' -> onSideMenu = false;
             }
         }
     }
