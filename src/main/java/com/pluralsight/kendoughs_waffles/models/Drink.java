@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
+import java.text.NumberFormat;
+
 @Entity
 public class Drink extends Product{
     @Enumerated(EnumType.STRING)
@@ -32,6 +34,7 @@ public class Drink extends Product{
 
     @Override
     public String printDetails() {
-        return flavor.getLabel() + " - " + size.getLabel() + " - " + getPrice();
+        NumberFormat money = NumberFormat.getCurrencyInstance();
+        return flavor.getLabel() + " - " + size.getLabel() + " - " + money.format(getPrice());
     }
 }

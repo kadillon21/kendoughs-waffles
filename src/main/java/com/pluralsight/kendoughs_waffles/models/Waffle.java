@@ -4,6 +4,7 @@ import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class Waffle extends Product{
@@ -33,6 +34,7 @@ public class Waffle extends Product{
 
     @Override
     public String printDetails() {
-        return waffleType.getLabel() + " - " + waffleSize.getLabel() + " - " + getPrice();
+        NumberFormat money = NumberFormat.getCurrencyInstance();
+        return waffleType.getLabel() + " - " + waffleSize.getLabel() + " - " + money.format(getPrice());
     }
 }
