@@ -1,6 +1,7 @@
 package com.pluralsight.kendoughs_waffles.models.enums;
 
 public enum FillFlavor {
+    NONE("None"),
     NUTELLA("Nutella"),
     CREAM_CHEESE("Cream Cheese"),
     JAM("Strawberry Jam"),

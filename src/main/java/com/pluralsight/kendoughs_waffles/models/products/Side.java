@@ -1,7 +1,5 @@
-package com.pluralsight.kendoughs_waffles.models;
+package com.pluralsight.kendoughs_waffles.models.products;
 
-import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
-import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
 import com.pluralsight.kendoughs_waffles.models.enums.SideType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,7 +8,7 @@ import jakarta.persistence.Enumerated;
 import java.text.NumberFormat;
 
 @Entity
-public class Side extends Product{
+public class Side extends Product {
     @Enumerated(EnumType.STRING)
     private SideType type;
 

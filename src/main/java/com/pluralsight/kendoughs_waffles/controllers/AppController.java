@@ -1,9 +1,9 @@
 package com.pluralsight.kendoughs_waffles.controllers;
 
-import com.pluralsight.kendoughs_waffles.models.Drink;
+import com.pluralsight.kendoughs_waffles.models.products.Drink;
 import com.pluralsight.kendoughs_waffles.models.Order;
-import com.pluralsight.kendoughs_waffles.models.Product;
-import com.pluralsight.kendoughs_waffles.models.Side;
+import com.pluralsight.kendoughs_waffles.models.products.Product;
+import com.pluralsight.kendoughs_waffles.models.products.Side;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
 import com.pluralsight.kendoughs_waffles.models.enums.SideType;
@@ -118,7 +118,7 @@ public class AppController {
         while(onDrinkMenu) {
             Menus.drinkMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
-                case '1' -> ;
+                case '1' -> order.addProduct();
                 case '2' -> ;
                 case '3' -> ;
                 case '4' -> ;

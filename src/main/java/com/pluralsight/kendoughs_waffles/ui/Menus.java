@@ -1,7 +1,7 @@
 package com.pluralsight.kendoughs_waffles.ui;
 
 import com.pluralsight.kendoughs_waffles.models.Order;
-import com.pluralsight.kendoughs_waffles.models.Product;
+import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 
 import java.util.List;

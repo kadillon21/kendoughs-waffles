@@ -1,13 +1,15 @@
-package com.pluralsight.kendoughs_waffles.models;
+package com.pluralsight.kendoughs_waffles.models.products.waffles;
 
 import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
+import com.pluralsight.kendoughs_waffles.models.products.Product;
+import com.pluralsight.kendoughs_waffles.models.products.Topping;
 
 import java.text.NumberFormat;
 import java.util.List;
 
-public class Waffle extends Product{
+public class Waffle extends Product {
     private WaffleType waffleType;
     private WaffleSize waffleSize;
     private List<Topping> toppings;
@@ -30,6 +32,10 @@ public class Waffle extends Product{
             totalPrice += topping.getExtraCost();
         }
         return totalPrice;
+    }
+
+    public List<Topping> getToppings() {
+        return toppings;
     }
 
     @Override

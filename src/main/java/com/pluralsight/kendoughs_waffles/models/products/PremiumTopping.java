@@ -1,4 +1,4 @@
-package com.pluralsight.kendoughs_waffles.models;
+package com.pluralsight.kendoughs_waffles.models.products;
 
 import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import jakarta.persistence.Entity;

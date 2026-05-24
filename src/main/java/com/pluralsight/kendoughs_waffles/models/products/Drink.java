@@ -1,4 +1,4 @@
-package com.pluralsight.kendoughs_waffles.models;
+package com.pluralsight.kendoughs_waffles.models.products;
 
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
@@ -9,7 +9,7 @@ import jakarta.persistence.Enumerated;
 import java.text.NumberFormat;
 
 @Entity
-public class Drink extends Product{
+public class Drink extends Product {
     @Enumerated(EnumType.STRING)
     private DrinkFlavor flavor;
 

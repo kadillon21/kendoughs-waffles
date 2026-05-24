@@ -1,5 +1,7 @@
 package com.pluralsight.kendoughs_waffles.models;
 
+import com.pluralsight.kendoughs_waffles.models.products.Product;
+
 import java.util.List;
 
 public class Order {

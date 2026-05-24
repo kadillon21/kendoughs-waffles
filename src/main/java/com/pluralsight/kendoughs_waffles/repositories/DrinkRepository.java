@@ -1,6 +1,6 @@
 package com.pluralsight.kendoughs_waffles.repositories;
 
-import com.pluralsight.kendoughs_waffles.models.Drink;
+import com.pluralsight.kendoughs_waffles.models.products.Drink;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

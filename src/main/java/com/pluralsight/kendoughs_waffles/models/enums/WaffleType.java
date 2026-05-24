@@ -1,7 +1,7 @@
 package com.pluralsight.kendoughs_waffles.models.enums;
 
 public enum WaffleType {
-    CLASSIC("Classic"),
+    BUTTER_MILK("Butter Milk"),
     BELGIAN("Belgian"),
     LIEGE("Liege"),
     CHURRO("Churro"),
