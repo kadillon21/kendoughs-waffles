@@ -41,11 +41,22 @@ public class Order {
         products.add(product);
     }
 
+    public double calcSubTotal() {
+        double total = 0;
+        for(Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
+    }
+
+
     public double calcTotal() {
         double total = 0;
         for(Product product : products) {
             total += product.getPrice();
         }
+        double salesTax = total * 0.065;
+        total += (total*salesTax);
         return total;
     }
 

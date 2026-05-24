@@ -31,7 +31,7 @@ public class Side extends Product{
     @Override
     public String printDetails() {
 
-        return "";
+        return type.getLabel() + " - " + getPrice();
 
     }
 }

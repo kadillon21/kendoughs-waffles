@@ -13,6 +13,15 @@ public class Waffle extends Product{
     private boolean isStuffed;
     private FillFlavor fillFlavor;
 
+    public Waffle(String name, double price, WaffleType waffleType, WaffleSize waffleSize, List<Topping> toppings, boolean isStuffed, FillFlavor fillFlavor) {
+        super(name, price);
+        this.waffleType = waffleType;
+        this.waffleSize = waffleSize;
+        this.toppings = toppings;
+        this.isStuffed = isStuffed;
+        this.fillFlavor = fillFlavor;
+    }
+
     public double calcPrice(){
         double totalPrice = waffleSize.getPrice();
         if (isStuffed) { totalPrice += 1.5;}
@@ -24,6 +33,6 @@ public class Waffle extends Product{
 
     @Override
     public String printDetails() {
-        return "";
+        return waffleType.getLabel() + " - " + waffleSize.getLabel() + " - " + getPrice();
     }
 }

@@ -32,6 +32,6 @@ public class Drink extends Product{
 
     @Override
     public String printDetails() {
-        return "";
+        return flavor.getLabel() + " - " + size.getLabel() + " - " + getPrice();
     }
 }
