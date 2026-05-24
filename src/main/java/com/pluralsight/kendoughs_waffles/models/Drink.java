@@ -31,7 +31,7 @@ public class Drink extends Product{
     }
 
     @Override
-    public void printDetails() {
-
+    public String printDetails() {
+        return "";
     }
 }

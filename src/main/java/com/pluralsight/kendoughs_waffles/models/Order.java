@@ -48,4 +48,15 @@ public class Order {
         }
         return total;
     }
+
+    public String printOrder() {
+        StringBuilder sb = new StringBuilder();
+        for(Product product : products) {
+            sb.append("1  ").append(product.getName()).append(" - $").append(product.getPrice()).append("\n");
+            sb.append(product.printDetails());
+            product.printDetails();
+        }
+
+        return sb.toString();
+    }
 }

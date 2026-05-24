@@ -32,6 +32,6 @@ public abstract class Product implements Printable {
     }
 
     @Override
-    public abstract void printDetails();
+    public abstract String printDetails();
 
 }

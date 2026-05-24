@@ -169,6 +169,5 @@ public class AppController {
         }
     }
 
-    private void printReceipt() {
-    }
+    private void printReceipt() {}
 }
