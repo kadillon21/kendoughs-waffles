@@ -17,11 +17,10 @@ public class ClassicKen extends SignatureWaffle{
                 WaffleType.BUTTER_MILK,
                 WaffleSize.REGULAR,
                 new ArrayList<>(),
-                false,
                 FillFlavor.NONE,
                 "A golden buttermilk waffle kept simple and perfect — finished with creamy butter and a generous pour of maple syrup. The one that started it all."
         );
-        RegularTopping mapleSyrup = new RegularTopping(ToppingName.MAPLE_SYRUP, 0, 100, true);
+        RegularTopping mapleSyrup = new RegularTopping(ToppingName.MAPLE_SYRUP, 100, true);
         getToppings().add(mapleSyrup);
     }
 }

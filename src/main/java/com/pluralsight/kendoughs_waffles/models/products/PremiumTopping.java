@@ -6,8 +6,9 @@ import jakarta.persistence.Entity;
 @Entity
 public class PremiumTopping extends Topping{
 
-    public PremiumTopping(ToppingName name, double price, int stockCount, boolean isAvailable) {
-        super(name, price, stockCount, isAvailable);
+    public PremiumTopping(ToppingName name, int stockCount, boolean isAvailable) {
+        super(name, 1, stockCount, isAvailable);
+
     }
 
     @Override

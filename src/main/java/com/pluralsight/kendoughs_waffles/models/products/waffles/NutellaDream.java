@@ -18,13 +18,12 @@ public class NutellaDream extends SignatureWaffle{
                 WaffleType.BELGIAN,
                 WaffleSize.REGULAR,
                 new ArrayList<>(),
-                false,
                 FillFlavor.NONE,
                 "A Belgian waffle stuffed with rich Nutella, topped with fresh strawberries and whipped cream. Warning: this one is dangerously good."
         );
-        PremiumTopping nutella = new PremiumTopping(ToppingName.NUTELLA, 1, 100, true);
-        PremiumTopping freshStrawberries = new PremiumTopping(ToppingName.FRESH_STRAWBERRIES, 1, 100, true);
-        RegularTopping whippedCream = new RegularTopping(ToppingName.WHIPPED_CREAM, 1, 100, true);
+        PremiumTopping nutella = new PremiumTopping(ToppingName.NUTELLA, 100, true);
+        PremiumTopping freshStrawberries = new PremiumTopping(ToppingName.FRESH_STRAWBERRIES, 100, true);
+        RegularTopping whippedCream = new RegularTopping(ToppingName.WHIPPED_CREAM, 100, true);
         getToppings().add(nutella);
         getToppings().add(freshStrawberries);
         getToppings().add(whippedCream);

@@ -2,6 +2,7 @@ package com.pluralsight.kendoughs_waffles.ui;
 
 import com.pluralsight.kendoughs_waffles.models.Order;
 import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
+import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
@@ -10,7 +11,6 @@ import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Menus {
     private static final String B = ConsoleUtilities.BORDER;
@@ -56,7 +56,7 @@ public class Menus {
     public static void waffleMenu() {
         System.out.println();
         System.out.println(B + "╔═════════════════════════════════╗");
-        System.out.println(B + "║" + Bo + U + R + "          Waffle Menu           " + R + B + "║");
+        System.out.println(B + "║" + Bo + U + R + "          Waffle Menu            " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "1" + R + ")  Build your own Waffle      " + B + "║");
@@ -79,7 +79,7 @@ public class Menus {
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + Bo + A + "Type:    " + R + typeDisplay + R + "                    " + B + "║");
         System.out.println(B + "║  " + Bo + A + "Size:    " + R + sizeDisplay + R + "                    " + B + "║");
-        System.out.println(B + "║  " + Bo + A + "Filling:    " + R + filling + R + "                    " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Filling:    " + R + filling.label + R + "                    " + B + "║");
         System.out.println(B + "║  " + Bo + A + "Toppings:" + R + "                        " + B + "║");
         for (Topping topping : toppings){
             System.out.println(B + "║  " + R + "\t" + topping.getLabel() + "         " + topping.getPrice() + B + "          ║");
@@ -136,43 +136,70 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "        Choose Your Filling      " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + A + "1" + R + ")  None             " + A + "+$0.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry          " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  None             " + A + "+$0.00" + R + "    " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.00" + R + "    " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.00" + R + "    " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.00" + R + "    " + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry       " + A + "+$1.00" + R + "    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
-    public static void customWaffleToppingsMenu() {
+    public static void customWaffleToppingsMenu(List<Topping> selected) {
+
         System.out.println();
         System.out.println(B + "╔═════════════════════════════════╗");
         System.out.println(B + "║" + Bo + U + R + "       Choose Toppings           " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + Bo + A + "Regular" + R + "  " + A + "+$0.50 each" + R + "          " + B + "║");
-        System.out.println(B + "║  " + A + "1" + R + ")  Whipped Cream              " + B + "║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Powdered Sugar             " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Maple Syrup                " + B + "║");
-        System.out.println(B + "║  " + A + "4" + R + ")  Cinnamon                   " + B + "║");
-        System.out.println(B + "║  " + A + "5" + R + ")  Butter                     " + B + "║");
-        System.out.println(B + "║  " + A + "6" + R + ")  Caramel Drizzle            " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.WHIPPED_CREAM)   + A + "1"  + R + ")  Whipped Cream              " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.POWDERED_SUGAR)  + A + "2"  + R + ")  Powdered Sugar             " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.MAPLE_SYRUP)     + A + "3"  + R + ")  Maple Syrup                " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.CINNAMON)        + A + "4"  + R + ")  Cinnamon                   " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.BUTTER)          + A + "5"  + R + ")  Butter                     " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.CARAMEL_DRIZZLE) + A + "6"  + R + ")  Caramel Drizzle            " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + Bo + A + "Premium" + R + "  " + A + "+$1.00 each" + R + "          " + B + "║");
-        System.out.println(B + "║  " + A + "7" + R + ")  Nutella                    " + B + "║");
-        System.out.println(B + "║  " + A + "8" + R + ")  Fresh Strawberries         " + B + "║");
-        System.out.println(B + "║  " + A + "9" + R + ")  Bacon Crumbles             " + B + "║");
-        System.out.println(B + "║  " + A + "10" + R + ") Ice Cream                  " + B + "║");
-        System.out.println(B + "║  " + A + "11" + R + ") Fresh Blueberries          " + B + "║");
-        System.out.println(B + "║  " + A + "12" + R + ") Cookie Butter              " + B + "║");
-        System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Special" + R + "  " + A + "+$1.50" + R + "               " + B + "║");
-        System.out.println(B + "║  " + A + "13" + R + ") Stuffed Option             " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.NUTELLA)             + A + "7"  + R + ")  Nutella                    " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_STRAWBERRIES)  + A + "8"  + R + ")  Fresh Strawberries         " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.BACON_CRUMBLES)      + A + "9"  + R + ")  Bacon Crumbles             " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.ICE_CREAM)           + A + "10" + R + ") Ice Cream                  " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_BLUEBERRIES)   + A + "11" + R + ") Fresh Blueberries          " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.COOKIE_BUTTER)       + A + "12" + R + ") Cookie Butter              " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "D" + R + ")  Done selecting             " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
+
+    private static String mark(List<Topping> selected, ToppingName name) {
+        return selected.stream()
+                .anyMatch(t -> t.getLabel().equals(name.getLabel()))
+                ? A + "✔ " + R
+                : "  ";
+    }
+
+    public static void removeToppingMenu(List<Topping> selected) {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "       Remove a Topping          " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+
+        if (selected.isEmpty()) {
+            System.out.println(B + "║  No toppings added yet.         " + B + "║");
+        } else {
+            for (int i = 0; i < selected.size(); i++) {
+                String label = String.valueOf(selected.get(i).getLabel());
+                String line = String.format("%-29s", "  " + A + (i + 1) + R + ")  " + label);
+                System.out.println(B + "║" + line + B + "║");
+            }
+        }
+
+        System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);
@@ -190,6 +217,21 @@ public class Menus {
         System.out.println(B + "║  " + A + "4" + R + ")  Lemonade         " + A + "$2.49" + R + "       " + B + "║");
         System.out.println(B + "║  " + A + "5" + R + ")  Apple Juice      " + A + "$2.49" + R + "       " + B + "║");
         System.out.println(B + "║  " + A + "6" + R + ")  Cranberry Juice  " + A + "$2.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
+
+    public static void drinkSizeMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "        Choose Your Size         " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Small            " + A + "$2.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Medium           " + A + "$2.50" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Large            " + A + "$3.00" + R + "      " + B + "║");
+        System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);
@@ -232,8 +274,10 @@ public class Menus {
         System.out.println(
                 """
                 About Us
-                At Ken-dough's Waffles, we keep it simple — great waffles, good vibes, and no reason to be anywhere else. Every waffle we make is crispy on the outside, fluffy on the inside, and loaded with the toppings you actually want.
-                We started Ken-dough's because we believed the world needed a waffle spot that felt like home — warm, no-fuss, and always worth the trip. Whether you're grabbing a quick bite or staying a while, we're just happy you're here.
+                At Ken-dough's Waffles, we keep it simple — great waffles, good vibes, and no reason to be anywhere else. 
+                Every waffle we make is crispy on the outside, fluffy on the inside, and loaded with the toppings you actually want.
+                We started Ken-dough's because we believed the world needed a waffle spot that felt like home — warm, no-fuss, and always worth the trip. 
+                Whether you're grabbing a quick bite or staying a while, we're just happy you're here.
                 Come hungry. Leave happy. That's the Ken-dough's way.
                 """
         );
@@ -357,7 +401,7 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "          Daily Special          " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + R + "Today's special:             " + B + "║");
+        System.out.println(B + "║  " + R + "Today's special:               " + B + "║");
         System.out.println(B + "║  " + A + special + R + "             " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "1" + R + ")  Add to Order               " + B + "║");

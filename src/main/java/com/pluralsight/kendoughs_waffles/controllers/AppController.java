@@ -1,9 +1,8 @@
 package com.pluralsight.kendoughs_waffles.controllers;
 
 import com.pluralsight.kendoughs_waffles.models.enums.*;
-import com.pluralsight.kendoughs_waffles.models.products.Drink;
+import com.pluralsight.kendoughs_waffles.models.products.*;
 import com.pluralsight.kendoughs_waffles.models.Order;
-import com.pluralsight.kendoughs_waffles.models.products.Side;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.ReceiptWriter;
@@ -11,6 +10,7 @@ import com.pluralsight.kendoughs_waffles.util.UserInput;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class AppController {
@@ -93,11 +93,11 @@ public class AppController {
         Waffle customWaffle = new Waffle("Custom Waffle", 0, null, null, new ArrayList<>(), FillFlavor.NONE);
         while (onCustomWaffleMenu){
             Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings());
-            switch(UserInput.promptForChar("What would you like to do? ", "123456X")){
+            switch(UserInput.promptForChar("What would you like to do? ", "12345CX")){
                 case '1' -> customWaffle.setWaffleType(handleCustomWaffleTypeMenu(order));
                 case '2' -> customWaffle.setWaffleSize(handleCustomWaffleSizeMenu(order));
                 case '3' -> customWaffle.setFillFlavor(handleCustomWaffleFillFlavorMenu(order));
-                case '4' -> handleCustomWaffleToppingsMenu(order);
+                case '4' -> customWaffle.getToppings().addAll(handleCustomWaffleToppingsMenu());
                 case '5' -> handleToppingRemovalMenu(order);
                 case 'C' -> order.addProduct(customWaffle) ;
                 case 'X' -> onCustomWaffleMenu = false;
@@ -130,7 +130,7 @@ public class AppController {
 
     private FillFlavor handleCustomWaffleFillFlavorMenu(Order order) {
         Menus.customWaffleFillingMenu();
-        return switch (UserInput.promptForChar("What type of filling do you want? ", "123X")) {
+        return switch (UserInput.promptForChar("What type of filling do you want? ", "12345X")) {
             case '1' -> FillFlavor.NONE;
             case '2' -> FillFlavor.NUTELLA;
             case '3' -> FillFlavor.CREAM_CHEESE;
@@ -141,8 +141,29 @@ public class AppController {
         };
     }
 
-    private void handleCustomWaffleToppingsMenu(Order order) {
-
+    private List<Topping> handleCustomWaffleToppingsMenu() {
+        boolean onCustomWaffleToppingsMenu = true;
+        ArrayList<Topping> toppings = new ArrayList<>();
+        Menus.customWaffleToppingsMenu(toppings);
+        String[] validMenuOptions = {"1", "2","3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "D"};
+        while(onCustomWaffleToppingsMenu) {
+            switch (UserInput.promptForString("What toppings would you like?", validMenuOptions)){
+                case "1" -> toppings.add(new RegularTopping(ToppingName.WHIPPED_CREAM, 100, true));
+                case "2" -> toppings.add(new RegularTopping(ToppingName.POWDERED_SUGAR, 100, true));
+                case "3" -> toppings.add(new RegularTopping(ToppingName.MAPLE_SYRUP, 100, true));
+                case "4" -> toppings.add(new RegularTopping(ToppingName.CINNAMON, 100, true));
+                case "5" -> toppings.add(new RegularTopping(ToppingName.BUTTER, 100, true));
+                case "6" -> toppings.add(new RegularTopping(ToppingName.CARAMEL_DRIZZLE, 100, true));
+                case "7" -> toppings.add(new PremiumTopping(ToppingName.NUTELLA, 100, true));
+                case "8" -> toppings.add(new PremiumTopping(ToppingName.FRESH_STRAWBERRIES, 100, true));
+                case "9" -> toppings.add(new PremiumTopping(ToppingName.BACON_CRUMBLES, 100, true));
+                case "10" -> toppings.add(new PremiumTopping(ToppingName.ICE_CREAM, 100, true));
+                case "11" -> toppings.add(new PremiumTopping(ToppingName.FRESH_BLUEBERRIES, 100, true));
+                case "12" -> toppings.add(new PremiumTopping(ToppingName.COOKIE_BUTTER, 100, true));
+                case "D" -> onCustomWaffleToppingsMenu = false;
+            }
+        }
+        return toppings;
     }
 
     private void handleToppingRemovalMenu(Order order) {
@@ -166,7 +187,7 @@ public class AppController {
     }
 
     private DrinkSize handleDrinkSize() {
-
+        Menus.drinkSizeMenu();
         return switch (UserInput.promptForChar("What size drink do you want? ", "123X")) {
             case '1' -> DrinkSize.SMALL;
             case '2' -> DrinkSize.MEDIUM;

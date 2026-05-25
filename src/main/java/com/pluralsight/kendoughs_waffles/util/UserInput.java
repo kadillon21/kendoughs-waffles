@@ -1,6 +1,7 @@
 package com.pluralsight.kendoughs_waffles.util;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
@@ -142,6 +143,26 @@ public class UserInput {
         prompt += arrow;
         System.out.print(prompt);
         return scanner.nextLine();
+    }
+
+    public static String promptForString(String prompt, String[] validOptions) {
+        String input = "";
+        boolean inputValid = false;
+        prompt += arrow;
+        System.out.print(prompt);
+
+        while (!inputValid) {
+            input = scanner.nextLine();
+            for (String option : validOptions) {
+                if (option.equalsIgnoreCase(input)) {
+                    inputValid = true;
+                } else{
+                    System.out.println(ConsoleUtilities.ERROR + "Invalid choice... Try again");
+                    System.out.println(prompt);
+                }
+            }
+        }
+        return input;
     }
 
     // Prompts user for a String and validates that an actual character was provided

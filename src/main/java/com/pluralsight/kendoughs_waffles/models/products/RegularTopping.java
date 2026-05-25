@@ -6,8 +6,8 @@ import jakarta.persistence.Entity;
 @Entity
 public class RegularTopping extends Topping{
 
-    public RegularTopping(ToppingName name, double price, int stockCount, boolean isAvailable) {
-        super(name, price, stockCount, isAvailable);
+    public RegularTopping(ToppingName name, int stockCount, boolean isAvailable) {
+        super(name, .5, stockCount, isAvailable);
     }
 
     @Override
