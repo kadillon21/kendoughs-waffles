@@ -90,7 +90,7 @@ public class AppController {
 
     private void handleCustomWaffleMenu(Order order) {
         boolean onCustomWaffleMenu = true;
-        Waffle customWaffle = new Waffle("Custom Waffle", 0, null, null, new ArrayList<>(), false, FillFlavor.NONE);
+        Waffle customWaffle = new Waffle("Custom Waffle", 0, null, null, new ArrayList<>(), FillFlavor.NONE);
         while (onCustomWaffleMenu){
             Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings());
             switch(UserInput.promptForChar("What would you like to do? ", "123456X")){

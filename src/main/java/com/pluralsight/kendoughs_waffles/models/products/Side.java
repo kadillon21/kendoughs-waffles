@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 @Entity
 public class Side extends Product {
     @Enumerated(EnumType.STRING)
-    private SideType type;
+    private SideType sideType;
 
     private int stockCount;
     private boolean isAvailable;
@@ -22,7 +22,7 @@ public class Side extends Product {
 
     public Side(double price, SideType sideType, int stockCount, boolean isAvailable) {
         super(sideType.getLabel(), price);
-        this.type = sideType;
+        this.sideType = sideType;
         this.stockCount = stockCount;
         this.isAvailable = isAvailable;
     }
@@ -30,8 +30,10 @@ public class Side extends Product {
 
     @Override
     public String printDetails() {
+        StringBuilder sb = new StringBuilder();
         NumberFormat money = NumberFormat.getCurrencyInstance();
-        return type.getLabel() + " - " + money.format(getPrice());
+        sb.append(sideType.getLabel()).append(" - ").append(money.format(this.getPrice())).append("\n");
 
+        return sb.toString();
     }
 }

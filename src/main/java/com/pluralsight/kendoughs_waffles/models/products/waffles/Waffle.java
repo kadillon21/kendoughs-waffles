@@ -16,18 +16,16 @@ public class Waffle extends Product {
     private boolean isStuffed;
     private FillFlavor fillFlavor;
 
-    public Waffle(String name, double price, WaffleType waffleType, WaffleSize waffleSize, List<Topping> toppings, boolean isStuffed, FillFlavor fillFlavor) {
+    public Waffle(String name, double price, WaffleType waffleType, WaffleSize waffleSize, List<Topping> toppings, FillFlavor fillFlavor) {
         super(name, price);
         this.waffleType = waffleType;
         this.waffleSize = waffleSize;
         this.toppings = toppings;
-        this.isStuffed = isStuffed;
         this.fillFlavor = fillFlavor;
     }
 
     public double calcPrice(){
-        double totalPrice = waffleSize.getPrice();
-        if (isStuffed) { totalPrice += 1.5;}
+        double totalPrice = waffleSize.getPrice() + waffleType.getPrice() + fillFlavor.getPrice();
         for (Topping topping : toppings) {
             totalPrice += topping.getExtraCost();
         }
@@ -40,8 +38,17 @@ public class Waffle extends Product {
 
     @Override
     public String printDetails() {
+        StringBuilder sb = new StringBuilder();
         NumberFormat money = NumberFormat.getCurrencyInstance();
-        return waffleType.getLabel() + " - " + waffleSize.getLabel() + " - " + money.format(getPrice());
+        sb.append(this.getName()).append(" - ").append(money.format(this.getPrice())).append("\n");
+        sb.append("\tType: ").append(waffleType.getLabel()).append(" ").append(money.format(waffleType.getPrice())).append("\n");
+        sb.append("\tSize: ").append(waffleSize.getLabel()).append(" ").append(money.format(waffleSize.getPrice())).append("\n");
+        sb.append("\tFilling: ").append(fillFlavor.getLabel()).append(" ").append(money.format(fillFlavor.getPrice())).append("\n");
+        sb.append("\tToppings: ");
+        for (Topping topping : toppings) {
+            sb.append("\t").append(topping.getLabel()).append(" ").append(money.format(topping.getExtraCost())).append("\n");
+        }
+        return sb.toString();
     }
 
     public WaffleType getType() {

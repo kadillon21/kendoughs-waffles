@@ -10,8 +10,8 @@ import java.util.List;
 public class SignatureWaffle extends Waffle{
     private final String description;
 
-    public SignatureWaffle(String name, double price, WaffleType waffleType, WaffleSize waffleSize, List<Topping> toppings, boolean isStuffed, FillFlavor fillFlavor, String description) {
-        super(name, price, waffleType, waffleSize, toppings, isStuffed, fillFlavor);
+    public SignatureWaffle(String name, double price, WaffleType waffleType, WaffleSize waffleSize, List<Topping> toppings, FillFlavor fillFlavor, String description) {
+        super(name, price, waffleType, waffleSize, toppings, fillFlavor);
         this.description = description;
     }
 
