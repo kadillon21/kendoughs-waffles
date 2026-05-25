@@ -7,6 +7,10 @@ import com.pluralsight.kendoughs_waffles.models.products.Side;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
 import com.pluralsight.kendoughs_waffles.models.enums.SideType;
+import com.pluralsight.kendoughs_waffles.models.products.waffles.ClassicKen;
+import com.pluralsight.kendoughs_waffles.models.products.waffles.NutellaDream;
+import com.pluralsight.kendoughs_waffles.models.products.waffles.RedRoyale;
+import com.pluralsight.kendoughs_waffles.models.products.waffles.Sunrise;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.UserInput;
 
@@ -91,7 +95,10 @@ public class AppController {
         while (onSignatureWaffleMenu){
             Menus.signatureWaffleMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1X")){
-                case '1' -> ;
+                case '1' -> order.addProduct(new ClassicKen());
+                case '2' -> order.addProduct(new NutellaDream());
+                case '3' -> order.addProduct(new Sunrise());
+                case '4' -> order.addProduct(new RedRoyale());
                 case 'X' -> onSignatureWaffleMenu = false;
             }
         }
@@ -118,13 +125,30 @@ public class AppController {
         while(onDrinkMenu) {
             Menus.drinkMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
-                case '1' -> order.addProduct();
-                case '2' -> ;
-                case '3' -> ;
-                case '4' -> ;
-                case '5' -> ;
-                case '6' -> ;
+                case '1' -> order.addProduct(new Drink(2.99, DrinkFlavor.COFFEE, handleDrinkSize(), 10, true));
+                case '2' -> order.addProduct(new Drink(2.99, DrinkFlavor.OJ, handleDrinkSize(), 10, true));
+                case '3' -> order.addProduct(new Drink(1.99, DrinkFlavor.MILK, handleDrinkSize(), 10, true));
+                case '4' -> order.addProduct(new Drink(2.49, DrinkFlavor.LEMONADE, handleDrinkSize(), 10, true));
+                case '5' -> order.addProduct(new Drink(2.49, DrinkFlavor.APPLE_JUICE, handleDrinkSize(), 10, true));
+                case '6' -> order.addProduct(new Drink(2.49, DrinkFlavor.CRANBERRY_JUICE, handleDrinkSize(), 10, true));
                 case 'X' -> onDrinkMenu = false;
+            }
+        }
+    }
+
+    private DrinkSize handleDrinkSize() {
+        boolean selectingDrinkSize = true;
+        while(selectingDrinkSize) {
+            switch (UserInput.promptForChar("What size drink do you want? ", "123X")) {
+                case '1':
+                    selectingDrinkSize = false;
+                    return DrinkSize.SMALL;
+                case '2':
+                    selectingDrinkSize = false;
+                    return DrinkSize.MEDIUM;
+                case '3':
+                    selectingDrinkSize = false;
+                    return DrinkSize.LARGE;
             }
         }
     }

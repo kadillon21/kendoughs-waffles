@@ -4,6 +4,7 @@ import com.pluralsight.kendoughs_waffles.models.Order;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Menus {
@@ -252,9 +253,62 @@ public class Menus {
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
+    public static String getDailySpecial() {
+        return switch (LocalDate.now().getDayOfWeek()) {
+            case MONDAY, FRIDAY -> "The Classic Ken";
+            case TUESDAY, SATURDAY -> "The Nutella Dream";
+            case WEDNESDAY -> "The Sunrise";
+            case THURSDAY, SUNDAY -> "The Red Royale";
+        };
+    }
+
     public static void dailySpecialMenu() {
+        String special = getDailySpecial();
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "          Daily Special          " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + R + "Today's special:             " + B + "║");
+        System.out.println(B + "║  " + A + special + R + "             " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Add to Order               " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
     public static void signatureWaffleMenu() {
+        System.out.println();
+        System.out.println(B + "╔══════════════════════════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "              Signature Waffles                       " + R + B + "║");
+        System.out.println(B + "╠══════════════════════════════════════════════════════╣");
+        System.out.println(B + "║                                                      ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  " + Bo + "The Classic Ken" + R + "                               " + B + "║");
+        System.out.println(B + "║     Type:     Buttermilk                             " + B + "║");
+        System.out.println(B + "║     Toppings: Butter, Maple Syrup                    " + B + "║");
+        System.out.println(B + "║     Special:  None                                   " + B + "║");
+        System.out.println(B + "║                                                      ║");
+        System.out.println(B + "║  " + A + "2" + R + ")  " + Bo + "The Nutella Dream" + R + "                             " + B + "║");
+        System.out.println(B + "║     Type:     Belgian                                " + B + "║");
+        System.out.println(B + "║     Toppings: Nutella, Fresh Strawberries,           " + B + "║");
+        System.out.println(B + "║               Whipped Cream                         " + B + "║");
+        System.out.println(B + "║     Special:  " + A + "Stuffed (Nutella)" + R + "                      " + B + "║");
+        System.out.println(B + "║                                                      ║");
+        System.out.println(B + "║  " + A + "3" + R + ")  " + Bo + "The Sunrise" + R + "                                   " + B + "║");
+        System.out.println(B + "║     Type:     Churro                                 " + B + "║");
+        System.out.println(B + "║     Toppings: Bacon Crumbles, Maple Syrup,           " + B + "║");
+        System.out.println(B + "║               Powdered Sugar                        " + B + "║");
+        System.out.println(B + "║     Special:  None                                   " + B + "║");
+        System.out.println(B + "║                                                      ║");
+        System.out.println(B + "║  " + A + "4" + R + ")  " + Bo + "The Red Royale" + R + "                                " + B + "║");
+        System.out.println(B + "║     Type:     Red Velvet                             " + B + "║");
+        System.out.println(B + "║     Toppings: Ice Cream, Fresh Blueberries,          " + B + "║");
+        System.out.println(B + "║               Cookie Butter                         " + B + "║");
+        System.out.println(B + "║     Special:  " + A + "Stuffed (Cream Cheese)" + R + "                 " + B + "║");
+        System.out.println(B + "║                                                      ║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                                        " + B + "║");
+        System.out.println(B + "║                                                      ║");
+        System.out.println(B + "╚══════════════════════════════════════════════════════╝" + R);
     }
 }
