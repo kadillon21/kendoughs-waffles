@@ -10,8 +10,8 @@ import java.io.IOException;
 public class KendoughsWafflesApplication {
 
 	public static void main(String[] args) throws IOException {
-		SpringApplication.run(KendoughsWafflesApplication.class, args);
-        AppController appController = new AppController();
+		var context = SpringApplication.run(KendoughsWafflesApplication.class, args);
+        AppController appController = context.getBean(AppController.class);
         appController.run();
 	}
 
