@@ -4,9 +4,9 @@ import com.pluralsight.kendoughs_waffles.models.Order;
 
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,6 +27,7 @@ public class ReceiptWriter {
         double tax = total - subtotal;
 
         try {
+            new File("receipts").mkdirs();
             FileWriter fileWriter = new FileWriter("receipts/" + "Order-Receipt-"+ generateTimestamp() + ".txt");
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write("Ken-dough's Waffles\n");

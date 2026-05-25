@@ -24,6 +24,10 @@ public abstract class Topping {
         this.isAvailable = isAvailable;
     }
 
+    public Topping() {
+
+    }
+
     public double getPrice() {
         return price;
     }

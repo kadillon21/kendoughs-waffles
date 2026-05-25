@@ -10,6 +10,10 @@ public class RegularTopping extends Topping{
         super(name, .5, stockCount, isAvailable);
     }
 
+    protected RegularTopping() {
+        super();
+    }
+
     @Override
     public double getExtraCost() {
         return 0;

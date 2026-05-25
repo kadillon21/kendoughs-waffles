@@ -11,6 +11,10 @@ public class PremiumTopping extends Topping{
 
     }
 
+    protected PremiumTopping() {
+        super();
+    }
+
     @Override
     public double getExtraCost() {
         return getPrice();

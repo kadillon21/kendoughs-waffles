@@ -275,7 +275,7 @@ public class AppController {
         while(onViewCurrentOrder) {
             Menus.viewCurrentOrder(order);
             switch (UserInput.promptForChar("What would you like to do? ", "RX")) {
-                case '1' -> {
+                case 'R' -> {
                     onViewCurrentOrder = false;
                     handleRemoveItemMenu(order);
                 }
@@ -285,11 +285,11 @@ public class AppController {
     }
 
     private void handleRemoveItemMenu(Order order) {
-        boolean onRemoveItemMenu = true;
-        while(onRemoveItemMenu) {
-            Menus.removeItemMenu(order);
-
-        }
+//        boolean onRemoveItemMenu = true;
+//        while(onRemoveItemMenu) {
+//            Menus.removeItemMenu(order);
+//
+//
     }
 
     private void handleCheckoutMenu(Order order) throws IOException {
@@ -305,5 +305,20 @@ public class AppController {
 
     private void printReceipt(Order order) throws IOException {
         ReceiptWriter.writeReceipt(order);
+        updateStock(order);
+    }
+
+    private void updateStock(Order order) {
+        for (Product product : order.getProducts()) {
+            if (product instanceof Drink drink) {
+                drink.setStockCount(drink.getStockCount() - 1);
+                if (drink.getStockCount() <= 0) drink.setAvailable(false);
+                drinkRepository.save(drink);
+            } else if (product instanceof Side side) {
+                side.setStockCount(side.getStockCount() - 1);
+                if (side.getStockCount() <= 0) side.setAvailable(false);
+                sideRepository.save(side);
+            }
+        }
     }
 }
