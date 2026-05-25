@@ -7,10 +7,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class ReceiptWriter {
@@ -19,6 +21,10 @@ public class ReceiptWriter {
 
         Random random = new Random();
         int cardNumber = random.nextInt(9999);
+        NumberFormat money = NumberFormat.getCurrencyInstance();
+        double subtotal = order.calcSubTotal();
+        double total = order.calcTotal();
+        double tax = total - subtotal;
 
         try {
             FileWriter fileWriter = new FileWriter("receipts/" + "Order-Receipt-"+ generateTimestamp() + ".txt");
@@ -27,13 +33,14 @@ public class ReceiptWriter {
             writer.write("1134 Waffle Lane\n");
             writer.write("Waffle Ville, Tx 76554\n\n");
             writer.write("\tSale\n");
-            writer.write("Date: "+ String.valueOf(LocalDate.now()) + "\tTime: " + String.valueOf(LocalTime.now()) + "\n\n");
+            writer.write("Date: "+ String.valueOf(LocalDate.now()) + "\tTime: " + String.valueOf(LocalTime.now().truncatedTo(ChronoUnit.SECONDS)) + "\n\n");
             writer.write("Visa " + cardNumber + "\n\n");
             writer.write("Order Summary\n");
             writer.write(order.printOrder());
-            writer.write("Subtotal: " + "\n");
-            writer.write("Tax: " + "\n");
-            writer.write("Total: " + "\n");
+            writer.write("\n");
+            writer.write("Subtotal: " + money.format(subtotal) + "\n");
+            writer.write("Tax: " + money.format(tax) + "\n");
+            writer.write("Total: " + money.format(total) + "\n");
             writer.write("\n");
             writer.write("Thank you for shopping at Ken-dough's Waffles!\n");
             writer.write("We hope to see you again soon!");

@@ -1,16 +1,16 @@
 package com.pluralsight.kendoughs_waffles.models.enums;
 
 public enum WaffleSize {
-    MINI("Mini", 5.00),
-    REGULAR("Regular", 7.00),
-    LARGE("Large", 9.00);
+    MINI("Mini", 0),
+    REGULAR("Regular", 1.50),
+    LARGE("Large", 3.00);
 
     private final String label;
     private final double price;
 
-    WaffleSize(String label, double basePrice) {
+    WaffleSize(String label, double price) {
         this.label = label;
-        this.price = basePrice;
+        this.price = price;
     }
 
     public String getLabel() {

@@ -63,9 +63,10 @@ public class Order {
 
     public String printOrder() {
         StringBuilder sb = new StringBuilder();
+        int i = 0;
         for(Product product : products) {
-            sb.append("1  ").append(product.getName()).append(" - $").append(product.getPrice()).append("\n");
-            sb.append(product.printDetails());
+            i++;
+            sb.append(i).append(") ").append(product.printDetails());
             product.printDetails();
         }
 

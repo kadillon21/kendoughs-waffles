@@ -37,7 +37,7 @@ public class Drink extends Product {
         StringBuilder sb = new StringBuilder();
         NumberFormat money = NumberFormat.getCurrencyInstance();
         sb.append(flavor.getLabel()).append(" - ").append(money.format(this.getPrice())).append("\n");
-        sb.append("\tSize: ").append(size.getLabel());
+        sb.append("\tSize: ").append(size.getLabel()).append("\n");
 
         return sb.toString();
     }

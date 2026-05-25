@@ -122,8 +122,8 @@ public class Menus {
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "1" + R + ")  Mini             " + A + "+$0.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Regular          " + A + "+$1.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Large            " + A + "+$2.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Regular          " + A + "+$1.50" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Large            " + A + "+$3.00" + R + "      " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");

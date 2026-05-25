@@ -79,10 +79,22 @@ public class AppController {
         while (onSignatureWaffleMenu){
             Menus.signatureWaffleMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")){
-                case '1' -> order.addProduct(new ClassicKen());
-                case '2' -> order.addProduct(new NutellaDream());
-                case '3' -> order.addProduct(new Sunrise());
-                case '4' -> order.addProduct(new RedRoyale());
+                case '1' -> {
+                    order.addProduct(new ClassicKen());
+                    onSignatureWaffleMenu = false;
+                }
+                case '2' -> {
+                    order.addProduct(new NutellaDream());
+                    onSignatureWaffleMenu = false;
+                }
+                case '3' -> {
+                    order.addProduct(new Sunrise());
+                    onSignatureWaffleMenu = false;
+                }
+                case '4' -> {
+                    order.addProduct(new RedRoyale());
+                    onSignatureWaffleMenu = false;
+                }
                 case 'X' -> onSignatureWaffleMenu = false;
             }
         }
@@ -99,7 +111,10 @@ public class AppController {
                 case '3' -> customWaffle.setFillFlavor(handleCustomWaffleFillFlavorMenu(order));
                 case '4' -> customWaffle.getToppings().addAll(handleCustomWaffleToppingsMenu());
                 case '5' -> handleToppingRemovalMenu(order);
-                case 'C' -> order.addProduct(customWaffle) ;
+                case 'C' -> {
+                    order.addProduct(customWaffle);
+                    onCustomWaffleMenu = false;
+                }
                 case 'X' -> onCustomWaffleMenu = false;
             }
         }
@@ -144,9 +159,9 @@ public class AppController {
     private List<Topping> handleCustomWaffleToppingsMenu() {
         boolean onCustomWaffleToppingsMenu = true;
         ArrayList<Topping> toppings = new ArrayList<>();
-        Menus.customWaffleToppingsMenu(toppings);
-        String[] validMenuOptions = {"1", "2","3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "D"};
+        String[] validMenuOptions = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "D"};
         while(onCustomWaffleToppingsMenu) {
+            Menus.customWaffleToppingsMenu(toppings);
             switch (UserInput.promptForString("What toppings would you like?", validMenuOptions)){
                 case "1" -> toppings.add(new RegularTopping(ToppingName.WHIPPED_CREAM, 100, true));
                 case "2" -> toppings.add(new RegularTopping(ToppingName.POWDERED_SUGAR, 100, true));
@@ -216,7 +231,10 @@ public class AppController {
         while(onViewCurrentOrder) {
             Menus.viewCurrentOrder(order);
             switch (UserInput.promptForChar("What would you like to do? ", "RX")) {
-                case '1' -> handleRemoveItemMenu(order);
+                case '1' -> {
+                    onViewCurrentOrder = false;
+                    handleRemoveItemMenu(order);
+                }
                 case 'X' -> onViewCurrentOrder = false;
             }
         }

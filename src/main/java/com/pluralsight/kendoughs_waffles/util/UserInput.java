@@ -154,12 +154,15 @@ public class UserInput {
         while (!inputValid) {
             input = scanner.nextLine();
             for (String option : validOptions) {
+                option = option.toUpperCase();
                 if (option.equalsIgnoreCase(input)) {
                     inputValid = true;
-                } else{
-                    System.out.println(ConsoleUtilities.ERROR + "Invalid choice... Try again");
-                    System.out.println(prompt);
+                    break;
                 }
+            }
+            if(!inputValid){
+                System.out.println(ConsoleUtilities.ERROR + "Invalid choice... Try again");
+                System.out.println(prompt);
             }
         }
         return input;
