@@ -1,11 +1,16 @@
 package com.pluralsight.kendoughs_waffles.ui;
 
 import com.pluralsight.kendoughs_waffles.models.Order;
+import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
+import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
+import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
+import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Menus {
     private static final String B = ConsoleUtilities.BORDER;
@@ -62,30 +67,112 @@ public class Menus {
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
-    public static void customWaffleMenu() {
+    public static void customWaffleMenu(WaffleType type, WaffleSize size, FillFlavor filling, List<Topping> toppings) {
+
+        String typeDisplay    = type != null ? type.getLabel()           : "---";
+        String sizeDisplay    = size != null ? size.getLabel()           : "---";
+
         System.out.println();
         System.out.println(B + "╔═════════════════════════════════╗");
         System.out.println(B + "║" + Bo + U + R + "       Build Your Waffle         " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Step 1: Choose a Base" + R + "           " + B + "║");
-        System.out.println(B + "║  " + A + "1" + R + ")  Classic          " + A + "$4.99" + R + "       " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Type:    " + R + typeDisplay + R + "                    " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Size:    " + R + sizeDisplay + R + "                    " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Filling:    " + R + filling + R + "                    " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Toppings:" + R + "                        " + B + "║");
+        for (Topping topping : toppings){
+            System.out.println(B + "║  " + R + "\t" + topping.getLabel() + "         " + topping.getPrice() + B + "          ║");
+        }
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Edit Waffle Type           " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Edit Size                  " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Edit Size                  " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Add Toppings               " + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Remove Toppings            " + B + "║");
+        System.out.println(B + "║  " + A + "C" + R + ")  Confirm Waffle             " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
+
+    public static void customWaffleTypeMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "        Choose Your Type         " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Butter Milk      " + A + "$4.99" + R + "       " + B + "║");
         System.out.println(B + "║  " + A + "2" + R + ")  Belgian          " + A + "$5.49" + R + "       " + B + "║");
         System.out.println(B + "║  " + A + "3" + R + ")  Liege            " + A + "$5.99" + R + "       " + B + "║");
         System.out.println(B + "║  " + A + "4" + R + ")  Churro           " + A + "$5.99" + R + "       " + B + "║");
         System.out.println(B + "║  " + A + "5" + R + ")  Red Velvet       " + A + "$6.49" + R + "       " + B + "║");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Step 2: Choose a Size" + R + "           " + B + "║");
-        System.out.println(B + "║  " + A + "6" + R + ")  Mini             " + A + "+$0.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "7" + R + ")  Regular          " + A + "+$1.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "8" + R + ")  Large            " + A + "+$2.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Step 3: Add Toppings" + R + "            " + B + "║");
-        System.out.println(B + "║  " + A + "9" + R + ")  Regular Toppings " + A + "+$0.50" + R + "     " + B + "║");
-        System.out.println(B + "║  " + A + "10" + R + ") Premium Toppings  " + A + "+$1.00" + R + "     " + B + "║");
-        System.out.println(B + "║  " + A + "11" + R + ") Stuffed Option    " + A + "+$1.50" + R + "     " + B + "║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
+
+    public static void customWaffleSizeMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "        Choose Your Size         " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + A + "C" + R + ")  Confirm Waffle             " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Mini             " + A + "+$0.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Regular          " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Large            " + A + "+$2.00" + R + "      " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
+
+    public static void customWaffleFillingMenu(){
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "        Choose Your Filling      " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  None             " + A + "+$0.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry          " + A + "+$1.00" + R + "      " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "╚═════════════════════════════════╝" + R);
+    }
+
+    public static void customWaffleToppingsMenu() {
+        System.out.println();
+        System.out.println(B + "╔═════════════════════════════════╗");
+        System.out.println(B + "║" + Bo + U + R + "       Choose Toppings           " + R + B + "║");
+        System.out.println(B + "╠═════════════════════════════════╣");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Regular" + R + "  " + A + "+$0.50 each" + R + "          " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Whipped Cream              " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Powdered Sugar             " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Maple Syrup                " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Cinnamon                   " + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Butter                     " + B + "║");
+        System.out.println(B + "║  " + A + "6" + R + ")  Caramel Drizzle            " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Premium" + R + "  " + A + "+$1.00 each" + R + "          " + B + "║");
+        System.out.println(B + "║  " + A + "7" + R + ")  Nutella                    " + B + "║");
+        System.out.println(B + "║  " + A + "8" + R + ")  Fresh Strawberries         " + B + "║");
+        System.out.println(B + "║  " + A + "9" + R + ")  Bacon Crumbles             " + B + "║");
+        System.out.println(B + "║  " + A + "10" + R + ") Ice Cream                  " + B + "║");
+        System.out.println(B + "║  " + A + "11" + R + ") Fresh Blueberries          " + B + "║");
+        System.out.println(B + "║  " + A + "12" + R + ") Cookie Butter              " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Special" + R + "  " + A + "+$1.50" + R + "               " + B + "║");
+        System.out.println(B + "║  " + A + "13" + R + ") Stuffed Option             " + B + "║");
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "D" + R + ")  Done selecting             " + B + "║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);

@@ -43,4 +43,16 @@ public class Waffle extends Product {
         NumberFormat money = NumberFormat.getCurrencyInstance();
         return waffleType.getLabel() + " - " + waffleSize.getLabel() + " - " + money.format(getPrice());
     }
+
+    public WaffleType getType() {
+        return waffleType;
+    }
+
+    public WaffleSize getSize() {
+        return waffleSize;
+    }
+
+    public FillFlavor getFilling() {
+        return fillFlavor;
+    }
 }

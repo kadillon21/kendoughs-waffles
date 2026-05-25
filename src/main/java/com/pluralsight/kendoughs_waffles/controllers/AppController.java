@@ -1,16 +1,11 @@
 package com.pluralsight.kendoughs_waffles.controllers;
 
+import com.pluralsight.kendoughs_waffles.models.enums.*;
 import com.pluralsight.kendoughs_waffles.models.products.Drink;
 import com.pluralsight.kendoughs_waffles.models.Order;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.models.products.Side;
-import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
-import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
-import com.pluralsight.kendoughs_waffles.models.enums.SideType;
-import com.pluralsight.kendoughs_waffles.models.products.waffles.ClassicKen;
-import com.pluralsight.kendoughs_waffles.models.products.waffles.NutellaDream;
-import com.pluralsight.kendoughs_waffles.models.products.waffles.RedRoyale;
-import com.pluralsight.kendoughs_waffles.models.products.waffles.Sunrise;
+import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.UserInput;
 
@@ -84,7 +79,7 @@ public class AppController {
         while (onDailySpecial){
             Menus.dailySpecialMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
-                case '1' -> ;
+                case '1' -> order.addProduct(new ClassicKen());
                 case 'X' -> onDailySpecial = false;
             }
         }
@@ -106,18 +101,63 @@ public class AppController {
 
     private void handleCustomWaffleMenu(Order order) {
         boolean onCustomWaffleMenu = true;
+        Waffle customWaffle = new Waffle("Custom Waffle", 0, null, null, new ArrayList<>(), false, FillFlavor.NONE);
         while (onCustomWaffleMenu){
-            Menus.customWaffleMenu();
+            Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings());
             switch(UserInput.promptForChar("What would you like to do? ", "123456X")){
-                case '1' -> ;
-                case '2' -> ;
-                case '3' -> ;
-                case '4' -> ;
-                case '5' -> ;
-                case '6' -> ;
+                case '1' -> handleCustomWaffleTypeMenu(order);
+                case '2' -> handleCustomWaffleSizeMenu(order);
+                case '3' -> handleCustomWaffleFillFlavorMenu(order);
+                case '4' -> handleCustomWaffleToppingsMenu(order);
+                case '5' -> handleToppingRemovalMenu(order);
+                case 'C' -> order.addProduct(customWaffle) ;
                 case 'X' -> onCustomWaffleMenu = false;
             }
         }
+    }
+
+    private WaffleType handleCustomWaffleTypeMenu(Order order) {
+        Menus.customWaffleTypeMenu();
+        return switch (UserInput.promptForChar("What would you like to do? ", "12345X")) {
+            case '1' -> WaffleType.BUTTER_MILK;
+            case '2' -> WaffleType.BELGIAN;
+            case '3' -> WaffleType.LIEGE;
+            case '4' -> WaffleType.CHURRO;
+            case '5' -> WaffleType.RED_VELVET;
+            case 'X' -> null;
+            default -> handleCustomWaffleTypeMenu(order);
+        };
+    }
+    private WaffleSize handleCustomWaffleSizeMenu(Order order) {
+        Menus.customWaffleSizeMenu();
+        return switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
+            case '1' -> WaffleSize.MINI;
+            case '2' -> WaffleSize.REGULAR;
+            case '3' -> WaffleSize.LARGE;
+            case 'X' -> null;
+            default -> handleCustomWaffleSizeMenu(order);
+        };
+    }
+
+    private FillFlavor handleCustomWaffleFillFlavorMenu(Order order) {
+        Menus.customWaffleFillingMenu();
+        return switch (UserInput.promptForChar("What type of filling do you want? ", "123X")) {
+            case '1' -> FillFlavor.NONE;
+            case '2' -> FillFlavor.NUTELLA;
+            case '3' -> FillFlavor.CREAM_CHEESE;
+            case '4' -> FillFlavor.JAM;
+            case '5' -> FillFlavor.STRAWBERRY;
+            case 'X' -> null;
+            default -> handleCustomWaffleFillFlavorMenu(order);
+        };
+    }
+
+    private void handleCustomWaffleToppingsMenu(Order order) {
+
+    }
+
+    private void handleToppingRemovalMenu(Order order) {
+
     }
 
     private void handleDrinkMenu(Order order) {
@@ -137,20 +177,14 @@ public class AppController {
     }
 
     private DrinkSize handleDrinkSize() {
-        boolean selectingDrinkSize = true;
-        while(selectingDrinkSize) {
-            switch (UserInput.promptForChar("What size drink do you want? ", "123X")) {
-                case '1':
-                    selectingDrinkSize = false;
-                    return DrinkSize.SMALL;
-                case '2':
-                    selectingDrinkSize = false;
-                    return DrinkSize.MEDIUM;
-                case '3':
-                    selectingDrinkSize = false;
-                    return DrinkSize.LARGE;
-            }
-        }
+
+        return switch (UserInput.promptForChar("What size drink do you want? ", "123X")) {
+            case '1' -> DrinkSize.SMALL;
+            case '2' -> DrinkSize.MEDIUM;
+            case '3' -> DrinkSize.LARGE;
+            case 'X' -> null;
+            default -> handleDrinkSize();
+        };
     }
 
     private void handleSideMenu(Order order) {
@@ -158,10 +192,10 @@ public class AppController {
         while(onSideMenu) {
             Menus.sideMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
-                case '1' -> ;
-                case '2' -> ;
-                case '3' -> ;
-                case '4' -> ;
+                case '1' -> order.addProduct(new Side(2.99, SideType.HASH_BROWNS, 10, true));
+                case '2' -> order.addProduct(new Side(3.49, SideType.WAFFLE_FRIES, 10, true));
+                case '3' -> order.addProduct(new Side(2.49, SideType.BACON, 10, true));
+                case '4' -> order.addProduct(new Side(2.99, SideType.FRUIT_CUP, 10, true));
                 case 'X' -> onSideMenu = false;
             }
         }

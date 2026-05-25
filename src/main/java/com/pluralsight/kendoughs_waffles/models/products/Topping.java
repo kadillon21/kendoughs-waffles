@@ -28,4 +28,8 @@ public abstract class Topping {
     }
 
     public abstract double getExtraCost();
+
+    public Object getLabel() {
+        return name.getLabel();
+    }
 }
