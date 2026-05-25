@@ -58,8 +58,7 @@ public class Order {
             total += product.getPrice();
         }
         double salesTax = total * 0.065;
-        total += (total*salesTax);
-        return total;
+        return total + salesTax;
     }
 
     public String printOrder() {

@@ -3,34 +3,23 @@ package com.pluralsight.kendoughs_waffles.controllers;
 import com.pluralsight.kendoughs_waffles.models.enums.*;
 import com.pluralsight.kendoughs_waffles.models.products.Drink;
 import com.pluralsight.kendoughs_waffles.models.Order;
-import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.models.products.Side;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
+import com.pluralsight.kendoughs_waffles.util.ReceiptWriter;
 import com.pluralsight.kendoughs_waffles.util.UserInput;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class AppController {
 
-    public void run() {
+    public void run() throws IOException {
         handleMainMenu();
-
-
-        Drink drink = new Drink(10, DrinkFlavor.COFFEE, DrinkSize.LARGE, 10, true);
-        Side side = new Side(10, SideType.FRUIT_CUP, 10, true);
-
-        List<Product> products = new ArrayList<>();
-        products.add(drink);
-        products.add(side);
-
-        Order testOrder = new Order(1, "Kendall", "kendall@test.com", "555-1234", products);
-
-        Menus.checkoutMenu(testOrder);
     }
 
-    private void handleMainMenu() {
+    private void handleMainMenu() throws IOException {
         boolean onMainMenu = true;
         while(onMainMenu) {
             Menus.mainMenu();
@@ -44,11 +33,11 @@ public class AppController {
         }
     }
 
-    private void handleOrderMenu() {
+    private void handleOrderMenu() throws IOException {
         boolean onOrderMenu = true;
+        Order order = new Order(1, "Kendall", "kadillon21@gmail.com", "773-383-8814", new ArrayList<>());
         while(onOrderMenu) {
             Menus.orderMenu();
-            Order order = new Order(1, "Kendall", "kadillon21@gmail.com", "773-383-8814", new ArrayList<>());
             switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
                 case '1' -> handleWaffleMenu(order);
                 case '2' -> handleDrinkMenu(order);
@@ -89,7 +78,7 @@ public class AppController {
         boolean onSignatureWaffleMenu = true;
         while (onSignatureWaffleMenu){
             Menus.signatureWaffleMenu();
-            switch (UserInput.promptForChar("What would you like to do? ", "1X")){
+            switch (UserInput.promptForChar("What would you like to do? ", "1234X")){
                 case '1' -> order.addProduct(new ClassicKen());
                 case '2' -> order.addProduct(new NutellaDream());
                 case '3' -> order.addProduct(new Sunrise());
@@ -105,9 +94,9 @@ public class AppController {
         while (onCustomWaffleMenu){
             Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings());
             switch(UserInput.promptForChar("What would you like to do? ", "123456X")){
-                case '1' -> handleCustomWaffleTypeMenu(order);
-                case '2' -> handleCustomWaffleSizeMenu(order);
-                case '3' -> handleCustomWaffleFillFlavorMenu(order);
+                case '1' -> customWaffle.setWaffleType(handleCustomWaffleTypeMenu(order));
+                case '2' -> customWaffle.setWaffleSize(handleCustomWaffleSizeMenu(order));
+                case '3' -> customWaffle.setFillFlavor(handleCustomWaffleFillFlavorMenu(order));
                 case '4' -> handleCustomWaffleToppingsMenu(order);
                 case '5' -> handleToppingRemovalMenu(order);
                 case 'C' -> order.addProduct(customWaffle) ;
@@ -205,6 +194,10 @@ public class AppController {
         boolean onViewCurrentOrder = true;
         while(onViewCurrentOrder) {
             Menus.viewCurrentOrder(order);
+            switch (UserInput.promptForChar("What would you like to do? ", "RX")) {
+                case '1' -> handleRemoveItemMenu(order);
+                case 'X' -> onViewCurrentOrder = false;
+            }
         }
     }
 
@@ -216,16 +209,18 @@ public class AppController {
         }
     }
 
-    private void handleCheckoutMenu(Order order) {
+    private void handleCheckoutMenu(Order order) throws IOException {
         boolean onCheckoutMenu = true;
         while(onCheckoutMenu) {
             Menus.checkoutMenu(order);
             switch (UserInput.promptForChar("What would you like to do? ", "1X")) {
-                case '1' -> printReceipt();
-                case 'X' -> Menus.mainMenu();
+                case '1' -> printReceipt(order);
+                case 'X' -> onCheckoutMenu = false;
             }
         }
     }
 
-    private void printReceipt() {}
+    private void printReceipt(Order order) throws IOException {
+        ReceiptWriter.writeReceipt(order);
+    }
 }

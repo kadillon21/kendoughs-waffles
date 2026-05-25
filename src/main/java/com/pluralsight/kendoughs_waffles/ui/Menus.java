@@ -89,7 +89,7 @@ public class Menus {
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "1" + R + ")  Edit Waffle Type           " + B + "║");
         System.out.println(B + "║  " + A + "2" + R + ")  Edit Size                  " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Edit Size                  " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Edit Filling               " + B + "║");
         System.out.println(B + "║  " + A + "4" + R + ")  Add Toppings               " + B + "║");
         System.out.println(B + "║  " + A + "5" + R + ")  Remove Toppings            " + B + "║");
         System.out.println(B + "║  " + A + "C" + R + ")  Confirm Waffle             " + B + "║");
@@ -335,6 +335,7 @@ public class Menus {
             System.out.println(B + "║  " + R + product.getName() + " - $" + product.getPrice() + B + "          ║");
         }
         System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + A + "R" + R + ")  Remove Item                " + B + "║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);
@@ -371,30 +372,30 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "              Signature Waffles                       " + R + B + "║");
         System.out.println(B + "╠══════════════════════════════════════════════════════╣");
         System.out.println(B + "║                                                      ║");
-        System.out.println(B + "║  " + A + "1" + R + ")  " + Bo + "The Classic Ken" + R + "                               " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  " + Bo + "The Classic Ken" + R + "                                 " + B + "║");
         System.out.println(B + "║     Type:     Buttermilk                             " + B + "║");
         System.out.println(B + "║     Toppings: Butter, Maple Syrup                    " + B + "║");
         System.out.println(B + "║     Special:  None                                   " + B + "║");
         System.out.println(B + "║                                                      ║");
-        System.out.println(B + "║  " + A + "2" + R + ")  " + Bo + "The Nutella Dream" + R + "                             " + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  " + Bo + "The Nutella Dream" + R + "                               " + B + "║");
         System.out.println(B + "║     Type:     Belgian                                " + B + "║");
         System.out.println(B + "║     Toppings: Nutella, Fresh Strawberries,           " + B + "║");
-        System.out.println(B + "║               Whipped Cream                         " + B + "║");
+        System.out.println(B + "║               Whipped Cream                          " + B + "║");
         System.out.println(B + "║     Special:  " + A + "Stuffed (Nutella)" + R + "                      " + B + "║");
         System.out.println(B + "║                                                      ║");
-        System.out.println(B + "║  " + A + "3" + R + ")  " + Bo + "The Sunrise" + R + "                                   " + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  " + Bo + "The Sunrise" + R + "                                     " + B + "║");
         System.out.println(B + "║     Type:     Churro                                 " + B + "║");
         System.out.println(B + "║     Toppings: Bacon Crumbles, Maple Syrup,           " + B + "║");
-        System.out.println(B + "║               Powdered Sugar                        " + B + "║");
+        System.out.println(B + "║               Powdered Sugar                         " + B + "║");
         System.out.println(B + "║     Special:  None                                   " + B + "║");
         System.out.println(B + "║                                                      ║");
-        System.out.println(B + "║  " + A + "4" + R + ")  " + Bo + "The Red Royale" + R + "                                " + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  " + Bo + "The Red Royale" + R + "                                  " + B + "║");
         System.out.println(B + "║     Type:     Red Velvet                             " + B + "║");
         System.out.println(B + "║     Toppings: Ice Cream, Fresh Blueberries,          " + B + "║");
-        System.out.println(B + "║               Cookie Butter                         " + B + "║");
+        System.out.println(B + "║               Cookie Butter                          " + B + "║");
         System.out.println(B + "║     Special:  " + A + "Stuffed (Cream Cheese)" + R + "                 " + B + "║");
         System.out.println(B + "║                                                      ║");
-        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                                        " + B + "║");
+        System.out.println(B + "║  " + A + "X" + R + ")  Go Back                                         " + B + "║");
         System.out.println(B + "║                                                      ║");
         System.out.println(B + "╚══════════════════════════════════════════════════════╝" + R);
     }

@@ -55,4 +55,16 @@ public class Waffle extends Product {
     public FillFlavor getFilling() {
         return fillFlavor;
     }
+
+    public void setWaffleType(WaffleType waffleType) {
+        this.waffleType = waffleType;
+    }
+
+    public void setWaffleSize(WaffleSize waffleSize) {
+        this.waffleSize = waffleSize;
+    }
+
+    public void setFillFlavor(FillFlavor fillFlavor) {
+        this.fillFlavor = fillFlavor;
+    }
 }
