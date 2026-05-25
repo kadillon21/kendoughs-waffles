@@ -4,16 +4,31 @@ import com.pluralsight.kendoughs_waffles.models.enums.*;
 import com.pluralsight.kendoughs_waffles.models.products.*;
 import com.pluralsight.kendoughs_waffles.models.Order;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
+import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
+import com.pluralsight.kendoughs_waffles.repositories.SideRepository;
+import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
+import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 import com.pluralsight.kendoughs_waffles.util.ReceiptWriter;
 import com.pluralsight.kendoughs_waffles.util.UserInput;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class AppController {
+
+    @Autowired
+    private DrinkRepository drinkRepository;
+
+    @Autowired
+    private SideRepository sideRepository;
+
+    @Autowired
+    private ToppingRepository toppingRepository;
 
     public void run() throws IOException {
         handleMainMenu();
@@ -163,22 +178,30 @@ public class AppController {
         while(onCustomWaffleToppingsMenu) {
             Menus.customWaffleToppingsMenu(toppings);
             switch (UserInput.promptForString("What toppings would you like?", validMenuOptions)){
-                case "1" -> toppings.add(new RegularTopping(ToppingName.WHIPPED_CREAM, 100, true));
-                case "2" -> toppings.add(new RegularTopping(ToppingName.POWDERED_SUGAR, 100, true));
-                case "3" -> toppings.add(new RegularTopping(ToppingName.MAPLE_SYRUP, 100, true));
-                case "4" -> toppings.add(new RegularTopping(ToppingName.CINNAMON, 100, true));
-                case "5" -> toppings.add(new RegularTopping(ToppingName.BUTTER, 100, true));
-                case "6" -> toppings.add(new RegularTopping(ToppingName.CARAMEL_DRIZZLE, 100, true));
-                case "7" -> toppings.add(new PremiumTopping(ToppingName.NUTELLA, 100, true));
-                case "8" -> toppings.add(new PremiumTopping(ToppingName.FRESH_STRAWBERRIES, 100, true));
-                case "9" -> toppings.add(new PremiumTopping(ToppingName.BACON_CRUMBLES, 100, true));
-                case "10" -> toppings.add(new PremiumTopping(ToppingName.ICE_CREAM, 100, true));
-                case "11" -> toppings.add(new PremiumTopping(ToppingName.FRESH_BLUEBERRIES, 100, true));
-                case "12" -> toppings.add(new PremiumTopping(ToppingName.COOKIE_BUTTER, 100, true));
+                case "1"  -> addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
+                case "2"  -> addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
+                case "3"  -> addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                case "4"  -> addToppingToList(toppings, ToppingName.CINNAMON);
+                case "5"  -> addToppingToList(toppings, ToppingName.BUTTER);
+                case "6"  -> addToppingToList(toppings, ToppingName.CARAMEL_DRIZZLE);
+                case "7"  -> addToppingToList(toppings, ToppingName.NUTELLA);
+                case "8"  -> addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
+                case "9"  -> addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
+                case "10" -> addToppingToList(toppings, ToppingName.ICE_CREAM);
+                case "11" -> addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
+                case "12" -> addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
                 case "D" -> onCustomWaffleToppingsMenu = false;
             }
         }
         return toppings;
+    }
+
+    private void addToppingToList(List<Topping> toppings, ToppingName toppingName) {
+        toppingRepository.findByNameAndIsAvailable(toppingName, true)
+                .ifPresentOrElse(
+                        toppings::add,
+                        () -> System.out.println(ConsoleUtilities.DANGER + "Sorry, that topping is unavailable." + ConsoleUtilities.RESET)
+                );
     }
 
     private void handleToppingRemovalMenu(Order order) {
@@ -187,15 +210,15 @@ public class AppController {
 
     private void handleDrinkMenu(Order order) {
         boolean onDrinkMenu = true;
-        while(onDrinkMenu) {
+        while (onDrinkMenu) {
             Menus.drinkMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
-                case '1' -> order.addProduct(new Drink(2.99, DrinkFlavor.COFFEE, handleDrinkSize(), 10, true));
-                case '2' -> order.addProduct(new Drink(2.99, DrinkFlavor.OJ, handleDrinkSize(), 10, true));
-                case '3' -> order.addProduct(new Drink(1.99, DrinkFlavor.MILK, handleDrinkSize(), 10, true));
-                case '4' -> order.addProduct(new Drink(2.49, DrinkFlavor.LEMONADE, handleDrinkSize(), 10, true));
-                case '5' -> order.addProduct(new Drink(2.49, DrinkFlavor.APPLE_JUICE, handleDrinkSize(), 10, true));
-                case '6' -> order.addProduct(new Drink(2.49, DrinkFlavor.CRANBERRY_JUICE, handleDrinkSize(), 10, true));
+                case '1' -> addDrinkToOrder(order, DrinkFlavor.COFFEE);
+                case '2' -> addDrinkToOrder(order, DrinkFlavor.OJ);
+                case '3' -> addDrinkToOrder(order, DrinkFlavor.MILK);
+                case '4' -> addDrinkToOrder(order, DrinkFlavor.LEMONADE);
+                case '5' -> addDrinkToOrder(order, DrinkFlavor.APPLE_JUICE);
+                case '6' -> addDrinkToOrder(order, DrinkFlavor.CRANBERRY_JUICE);
                 case 'X' -> onDrinkMenu = false;
             }
         }
@@ -212,18 +235,39 @@ public class AppController {
         };
     }
 
+    private void addDrinkToOrder(Order order, DrinkFlavor flavor) {
+        DrinkSize size = handleDrinkSize();
+        drinkRepository.findByFlavorAndSizeAndIsAvailable(flavor, size, true)
+                .ifPresentOrElse(
+                        order::addProduct,
+                        () -> System.out.println(ConsoleUtilities.DANGER + "Sorry, that size is unavailable." + ConsoleUtilities.RESET)
+                );
+    }
+
+    private boolean isDrinkAvailable(DrinkFlavor flavor) {
+        return !drinkRepository.findByFlavorAndIsAvailable(flavor, true).isEmpty();
+    }
+
     private void handleSideMenu(Order order) {
         boolean onSideMenu = true;
         while(onSideMenu) {
             Menus.sideMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
-                case '1' -> order.addProduct(new Side(2.99, SideType.HASH_BROWNS, 10, true));
-                case '2' -> order.addProduct(new Side(3.49, SideType.WAFFLE_FRIES, 10, true));
-                case '3' -> order.addProduct(new Side(2.49, SideType.BACON, 10, true));
-                case '4' -> order.addProduct(new Side(2.99, SideType.FRUIT_CUP, 10, true));
+                case '1' -> addSideToOrder(order, SideType.HASH_BROWNS);
+                case '2' -> addSideToOrder(order, SideType.WAFFLE_FRIES);
+                case '3' -> addSideToOrder(order, SideType.BACON);
+                case '4' -> addSideToOrder(order, SideType.FRUIT_CUP);
                 case 'X' -> onSideMenu = false;
             }
         }
+    }
+
+    private void addSideToOrder(Order order, SideType sideType) {
+        sideRepository.findBySideTypeAndIsAvailable(sideType, true)
+                .ifPresentOrElse(
+                        order::addProduct,
+                        () -> System.out.println(ConsoleUtilities.DANGER + "Sorry, that size is unavailable." + ConsoleUtilities.RESET)
+                );
     }
 
     private void handleViewCurrentOrder(Order order) {

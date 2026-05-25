@@ -8,11 +8,9 @@ import java.io.IOException;
 
 @SpringBootApplication
 public class KendoughsWafflesApplication {
-
-	public static void main(String[] args) throws IOException {
-		SpringApplication.run(KendoughsWafflesApplication.class, args);
-        AppController appController = new AppController();
+    public static void main(String[] args) throws IOException {
+        var context = SpringApplication.run(KendoughsWafflesApplication.class, args);
+        AppController appController = context.getBean(AppController.class);
         appController.run();
-	}
-
+    }
 }

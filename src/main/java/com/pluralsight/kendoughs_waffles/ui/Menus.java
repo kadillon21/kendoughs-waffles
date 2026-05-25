@@ -5,10 +5,13 @@ import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
+import com.pluralsight.kendoughs_waffles.models.products.Drink;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
+import com.pluralsight.kendoughs_waffles.models.products.Side;
 import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.List;
 
