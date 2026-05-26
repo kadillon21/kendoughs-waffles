@@ -2,9 +2,7 @@ package com.pluralsight.kendoughs_waffles.models.products;
 
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 import java.text.NumberFormat;
 

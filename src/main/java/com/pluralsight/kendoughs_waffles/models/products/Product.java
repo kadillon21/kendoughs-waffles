@@ -32,7 +32,12 @@ public abstract class Product implements Printable {
         return price;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public abstract String printDetails();
+
 
 }

@@ -41,4 +41,8 @@ public abstract class Topping {
     public Object getLabel() {
         return name.getLabel();
     }
+
+    public int getId() {
+        return id;
+    }
 }
