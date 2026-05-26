@@ -1,11 +1,7 @@
 package com.pluralsight.kendoughs_waffles.controllers;
 
-import com.pluralsight.kendoughs_waffles.models.products.Drink;
-import com.pluralsight.kendoughs_waffles.models.products.Side;
-import com.pluralsight.kendoughs_waffles.models.products.Topping;
-import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
-import com.pluralsight.kendoughs_waffles.repositories.SideRepository;
-import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
+import com.pluralsight.kendoughs_waffles.models.products.*;
+import com.pluralsight.kendoughs_waffles.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +22,12 @@ public class MenuRestController {
     @Autowired
     private ToppingRepository toppingRepository;
 
+    @Autowired
+    private WaffleTypeRepository waffleTypeRepository;
+
+    @Autowired
+    private WaffleSizeRepository waffleSizeRepository;
+
     @GetMapping("/drinks")
     public List<Drink> getAvailableDrinks() {
         return drinkRepository.findAllByIsAvailable(true);
@@ -39,5 +41,15 @@ public class MenuRestController {
     @GetMapping("/toppings")
     public List<Topping> getAvailableToppings() {
         return toppingRepository.findAllByIsAvailable(true);
+    }
+
+    @GetMapping("/waffle-types")
+    public List<WaffleTypeEntity> getAvailableWaffleTypes() {
+        return waffleTypeRepository.findAllByIsAvailable(true);
+    }
+
+    @GetMapping("/waffle-sizes")
+    public List<WaffleSizeEntity> getAvailableWaffleSizes() {
+        return waffleSizeRepository.findAllByIsAvailable(true);
     }
 }
