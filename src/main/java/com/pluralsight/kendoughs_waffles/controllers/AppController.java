@@ -7,6 +7,7 @@ import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
 import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
 import com.pluralsight.kendoughs_waffles.repositories.SideRepository;
 import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
+import com.pluralsight.kendoughs_waffles.services.OrderService;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 import com.pluralsight.kendoughs_waffles.util.ReceiptWriter;
@@ -29,6 +30,9 @@ public class AppController {
 
     @Autowired
     private ToppingRepository toppingRepository;
+
+    @Autowired
+    private OrderService orderService;
 
     public void run() throws IOException {
         handleMainMenu();
@@ -305,20 +309,7 @@ public class AppController {
 
     private void printReceipt(Order order) throws IOException {
         ReceiptWriter.writeReceipt(order);
-        updateStock(order);
+        orderService.updateStock(order);
     }
 
-    private void updateStock(Order order) {
-        for (Product product : order.getProducts()) {
-            if (product instanceof Drink drink) {
-                drink.setStockCount(drink.getStockCount() - 1);
-                if (drink.getStockCount() <= 0) drink.setAvailable(false);
-                drinkRepository.save(drink);
-            } else if (product instanceof Side side) {
-                side.setStockCount(side.getStockCount() - 1);
-                if (side.getStockCount() <= 0) side.setAvailable(false);
-                sideRepository.save(side);
-            }
-        }
-    }
 }
