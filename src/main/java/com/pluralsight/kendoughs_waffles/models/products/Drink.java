@@ -22,6 +22,7 @@ public class Drink extends Product {
         super();
     }
 
+    // Constructor
     public Drink(double price, DrinkFlavor flavor, DrinkSize size, int stockCount, boolean isAvailable) {
         super(flavor.getLabel(), price);
         this.flavor = flavor;
@@ -30,10 +31,12 @@ public class Drink extends Product {
         this.isAvailable = isAvailable;
     }
 
+    // Getters and Setters
     public int getStockCount() { return stockCount; }
     public void setStockCount(int stockCount) { this.stockCount = stockCount; }
     public void setAvailable(boolean isAvailable) { this.isAvailable = isAvailable; }
 
+    // Method to print details of the drink
     @Override
     public String printDetails() {
         StringBuilder sb = new StringBuilder();

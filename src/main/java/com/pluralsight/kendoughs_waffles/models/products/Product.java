@@ -5,9 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
+// Tells JPA that this class is a parent class for all products
 @MappedSuperclass
 public abstract class Product implements Printable {
+    // Marks this field as the primary key for the table
     @Id
+    // Automatically generates a unique ID for each new product
     @GeneratedValue
     private int id;
 

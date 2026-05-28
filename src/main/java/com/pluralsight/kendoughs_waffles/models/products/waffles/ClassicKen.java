@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class ClassicKen extends SignatureWaffle{
 
+    //
     public ClassicKen() {
         super(
                 "The Classic Ken",

@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 
 import java.text.NumberFormat;
 
+// Marks this class as a JPA entity, mapping to the "sides" table
 @Entity
 public class Side extends Product {
+    // Stores the enum value as a string inside the database
     @Enumerated(EnumType.STRING)
     private SideType sideType;
-
     private int stockCount;
     private boolean isAvailable;
 

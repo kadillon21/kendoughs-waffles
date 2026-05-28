@@ -3,15 +3,22 @@ package com.pluralsight.kendoughs_waffles.models.products;
 import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import jakarta.persistence.*;
 
+// Marks this class as a JPA entity mapped to the "toppings" table
 @Entity
 @Table(name = "toppings")
+
+// Stores all topping subclasses (PremiumTopping, RegularTopping) in this single table
+// The topping_type column determines which subclass to instantiate when reading from the database
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "topping_type")
 public abstract class Topping {
+    // Primary key
     @Id
+    // Automatically generates a unique ID for each new topping
     @GeneratedValue
     private int id;
 
+    // Stores the enum value as a string inside the database
     @Enumerated(EnumType.STRING)
     private ToppingName name;
 
