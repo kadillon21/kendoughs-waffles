@@ -46,7 +46,7 @@ public class Waffle extends Product {
         sb.append("\tFilling: ").append(fillFlavor.getLabel()).append(" ").append(money.format(fillFlavor.getPrice())).append("\n");
         sb.append("\tToppings: \n");
         for (Topping topping : toppings) {
-            sb.append("\t\t").append(topping.getLabel()).append(" ").append(money.format(topping.getExtraCost())).append("\n");
+            sb.append("\t    ").append(topping.getLabel()).append(" ").append(money.format(topping.getExtraCost())).append("\n");
         }
         return sb.toString();
     }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "toppings")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "topping_type")
 public abstract class Topping {
     @Id
     @GeneratedValue

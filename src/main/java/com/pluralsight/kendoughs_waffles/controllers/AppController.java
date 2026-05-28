@@ -10,11 +10,13 @@ import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
 import com.pluralsight.kendoughs_waffles.services.OrderService;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
+import com.pluralsight.kendoughs_waffles.util.ReceiptGetter;
 import com.pluralsight.kendoughs_waffles.util.ReceiptWriter;
 import com.pluralsight.kendoughs_waffles.util.UserInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +46,34 @@ public class AppController {
             Menus.mainMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
                 case '1' -> handleOrderMenu();
-                case '2' -> System.out.println("In development");
+                case '2' -> receiptLookUp();
                 case '3'-> Menus.displayStoreMenu();
                 case '4' -> Menus.displayAboutUs();
                 case 'X'-> onMainMenu = false;
+            }
+        }
+    }
+
+    private void receiptLookUp() {
+        int userOrder = UserInput.promptForInt("What is your four digit order number? ",1,9999);
+
+        File folder = new File("receipts");
+        File[] listOfFiles = folder.listFiles();
+        String lookup = "Order-" + String.format("%04d", userOrder);
+
+        if (listOfFiles != null) {
+            for (File file : listOfFiles) {
+                if (file.getName().contains(lookup)) {
+                    String filepath = file.getName();
+                    try {
+                        System.out.println("test");
+                        Menus.receiptDisplayMenu(ReceiptGetter.getReceipt(filepath));
+                    } catch (IOException e) {
+                        System.out.println("Error reading receipt file.");
+                    }
+                } else {
+                    System.out.println("No receipt found for that order number.");
+                }
             }
         }
     }
@@ -129,7 +155,7 @@ public class AppController {
                 case '2' -> customWaffle.setWaffleSize(handleCustomWaffleSizeMenu(order));
                 case '3' -> customWaffle.setFillFlavor(handleCustomWaffleFillFlavorMenu(order));
                 case '4' -> customWaffle.getToppings().addAll(handleCustomWaffleToppingsMenu());
-                case '5' -> handleToppingRemovalMenu(order);
+                case '5' -> handleToppingRemovalMenu(customWaffle);
                 case 'C' -> {
                     order.addProduct(customWaffle);
                     onCustomWaffleMenu = false;
@@ -208,8 +234,17 @@ public class AppController {
                 );
     }
 
-    private void handleToppingRemovalMenu(Order order) {
-
+    private void handleToppingRemovalMenu(Waffle waffle) {
+        boolean onToppingRemovalMenu = true;
+        while (onToppingRemovalMenu) {
+            Menus.removeToppingMenu(waffle.getToppings());
+            int chosenTopping = UserInput.promptForInt("Would you like to remove a topping? ", 0, waffle.getToppings().size());
+            if (chosenTopping <= waffle.getToppings().size()) {
+                waffle.getToppings().remove(chosenTopping - 1);
+            } if (chosenTopping == 0) {
+                onToppingRemovalMenu = false;
+            }
+        }
     }
 
     private void handleDrinkMenu(Order order) {
@@ -289,11 +324,16 @@ public class AppController {
     }
 
     private void handleRemoveItemMenu(Order order) {
-//        boolean onRemoveItemMenu = true;
-//        while(onRemoveItemMenu) {
-//            Menus.removeItemMenu(order);
-//
-//
+        boolean onRemoveItemMenu = true;
+        while(onRemoveItemMenu) {
+            Menus.removeItemMenu(order);
+            int chosenItem = UserInput.promptForInt("Would you like to remove a topping? ", 0, order.getProducts().size());
+            if (chosenItem <= order.getProducts().size()) {
+                order.getProducts().remove(chosenItem - 1);
+            } if (chosenItem == 0) {
+                onRemoveItemMenu = false;
+            }
+        }
     }
 
     private void handleCheckoutMenu(Order order) throws IOException {

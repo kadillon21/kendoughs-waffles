@@ -9,6 +9,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class ReceiptWriter {
 
@@ -30,7 +34,7 @@ public class ReceiptWriter {
 
         try {
             new File("receipts").mkdirs();
-            FileWriter fileWriter = new FileWriter("receipts/" + "Order-Receipt-"+ generateTimestamp() + ".txt");
+            FileWriter fileWriter = new FileWriter("receipts/" + generateOrderNumber() + generateTimestamp() + ".txt");
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write("Ken-dough's Waffles\n");
             writer.write("1134 Waffle Lane\n");
@@ -65,7 +69,7 @@ public class ReceiptWriter {
 
         try {
             new File("receipts").mkdirs();
-            FileWriter fileWriter = new FileWriter("receipts/" + "Order-Receipt-"+ generateTimestamp() + ".txt");
+            FileWriter fileWriter = new FileWriter("receipts/" +  generateOrderNumber()+ generateTimestamp() + ".txt");
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write("Ken-dough's Waffles\n");
             writer.write("1134 Waffle Lane\n");
@@ -91,7 +95,18 @@ public class ReceiptWriter {
 
     }
 
-    public static String generateTimestamp(){
+    public static String generateOrderNumber() throws IOException {
+        new File("receipts").mkdirs();
+        try(Stream<Path> files = Files.list(Paths.get("receipts"))) {
+            long count = files.count();
+            return "Order-" + String.format("%04d",count + 1) + "-";
+        } catch (IOException e) {
+            System.out.println("Error generating order number: " + e.getMessage());
+        }
+        return null;
+    }
+
+    private static String generateTimestamp(){
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy-HH-mm-ss");
 
