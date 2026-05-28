@@ -5,13 +5,15 @@ import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.RegularTopping;
+import com.pluralsight.kendoughs_waffles.models.products.Topping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClassicKen extends SignatureWaffle{
 
-    //
-    public ClassicKen() {
+
+    public ClassicKen(List<Topping> toppings) {
         super(
                 "The Classic Ken",
                 12.99,

@@ -151,14 +151,30 @@ public class AppController {
             switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
                 case '1' -> {
                     if (Menus.getDailySpecial().equals("Classic Ken")) {
-                        order.addProduct(new ClassicKen());
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                        addToppingToList(toppings, ToppingName.BUTTER);
+                        order.addProduct(new ClassicKen(toppings));
                     } else if (Menus.getDailySpecial().equals("Nutella Dream")) {
-                        order.addProduct(new NutellaDream());
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.NUTELLA);
+                        addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
+                        addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
+                        order.addProduct(new NutellaDream(toppings));
                     } else if (Menus.getDailySpecial().equals("Sunrise")) {
-                        order.addProduct(new Sunrise());
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
+                        addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                        addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
+                        order.addProduct(new Sunrise(toppings));
                     } else if (Menus.getDailySpecial().equals("Red Royale")) {
-                        order.addProduct(new RedRoyale());
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.ICE_CREAM);
+                        addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
+                        addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
+                        order.addProduct(new RedRoyale(toppings));
                     }
+                    onDailySpecial = false;
                 }
                 case 'X' -> onDailySpecial = false;
             }
@@ -173,19 +189,34 @@ public class AppController {
             Menus.signatureWaffleMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
                 case '1' -> {
-                    order.addProduct(new ClassicKen());
+                    List<Topping> toppings = new ArrayList<>();
+                    addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                    addToppingToList(toppings, ToppingName.BUTTER);
+                    order.addProduct(new ClassicKen(toppings));
                     onSignatureWaffleMenu = false;
                 }
                 case '2' -> {
-                    order.addProduct(new NutellaDream());
+                    List<Topping> toppings = new ArrayList<>();
+                    addToppingToList(toppings, ToppingName.NUTELLA);
+                    addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
+                    addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
+                    order.addProduct(new NutellaDream(toppings));
                     onSignatureWaffleMenu = false;
                 }
                 case '3' -> {
-                    order.addProduct(new Sunrise());
+                    List<Topping> toppings = new ArrayList<>();
+                    addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
+                    addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                    addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
+                    order.addProduct(new Sunrise(toppings));
                     onSignatureWaffleMenu = false;
                 }
                 case '4' -> {
-                    order.addProduct(new RedRoyale());
+                    List<Topping> toppings = new ArrayList<>();
+                    addToppingToList(toppings, ToppingName.ICE_CREAM);
+                    addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
+                    addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
+                    order.addProduct(new RedRoyale(toppings));
                     onSignatureWaffleMenu = false;
                 }
                 case 'X' -> onSignatureWaffleMenu = false;

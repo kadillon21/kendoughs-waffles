@@ -5,13 +5,15 @@ import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.PremiumTopping;
+import com.pluralsight.kendoughs_waffles.models.products.Topping;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RedRoyale extends SignatureWaffle {
 
-    public RedRoyale() {
+    public RedRoyale(List<Topping> toppings) {
         super(
                 "The Red Royale",
                 12.99,

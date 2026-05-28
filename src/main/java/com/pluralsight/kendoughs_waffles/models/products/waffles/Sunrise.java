@@ -6,12 +6,14 @@ import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.PremiumTopping;
 import com.pluralsight.kendoughs_waffles.models.products.RegularTopping;
+import com.pluralsight.kendoughs_waffles.models.products.Topping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Sunrise extends SignatureWaffle{
 
-    public Sunrise() {
+    public Sunrise(List<Topping> toppings) {
         super(
                 "The Sunrise",
                 12.99,
