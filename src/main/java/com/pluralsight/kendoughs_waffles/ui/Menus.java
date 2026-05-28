@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Menus {
+    // ANSI escape codes for color and formatting (Color scheme)
     private static final String B = ConsoleUtilities.BORDER;
     private static final String A = ConsoleUtilities.ACCENT;
     private static final String Bo = ConsoleUtilities.BOLD;
@@ -178,6 +179,7 @@ public class Menus {
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
+    // Method used to add a checkmark after selecting a topping
     private static String mark(List<Topping> selected, ToppingName name) {
         return selected.stream()
                 .anyMatch(t -> t.getLabel().equals(name.getLabel()))
@@ -384,7 +386,7 @@ public class Menus {
             System.out.println(B + "║                                           ║");
             for (Product product : products) {
                 i++;
-                String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 39);
+                String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 38);
                 System.out.println(B + "║  " + A + i + R + ") " + product.getName() + " - " + money.format(product.getPrice()) + B + padding + "║");
             }
         }
@@ -413,6 +415,7 @@ public class Menus {
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
+    // Method to determine daily special
     public static String getDailySpecial() {
         return switch (LocalDate.now().getDayOfWeek()) {
             case MONDAY, FRIDAY -> "The Classic Ken";
@@ -482,6 +485,7 @@ public class Menus {
         System.out.println(B + "╚══════════════════════════════════════════════════════╝" + R);
     }
 
+    // Helper method that adds padding to menu lines that have unpredictable length
     private static String messagePadding(String string, int length){
         if (string.length() < length){
             int padding = length - string.length();

@@ -13,9 +13,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// Marks the class as a service class containing business logic
 @Service
 public class OrderService {
 
+    // @Autowired tells Spring to inject the repository
     @Autowired
     private DrinkRepository drinkRepository;
 
