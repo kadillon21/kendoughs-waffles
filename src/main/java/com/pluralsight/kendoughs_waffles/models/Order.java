@@ -35,6 +35,18 @@ public class Order {
         return customerPhone;
     }
 
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
     public List<Product> getProducts() {
         return products;
     }

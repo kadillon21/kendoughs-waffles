@@ -2,6 +2,18 @@ package com.pluralsight.kendoughs_waffles.util;
 
 public class ConsoleUtilities {
 
+    // Clear Screen
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void clearScreen(String message) {
+        showProgressBar(message, 1000);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     // Reset
     public static final String RESET = "\u001B[0m";
 
