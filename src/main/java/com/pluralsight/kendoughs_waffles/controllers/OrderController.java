@@ -1,6 +1,6 @@
 package com.pluralsight.kendoughs_waffles.controllers;
 
-import com.pluralsight.kendoughs_waffles.models.OrderRequest;
+import com.pluralsight.kendoughs_waffles.models.products.order.OrderRequest;
 import com.pluralsight.kendoughs_waffles.util.ReceiptWriter;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

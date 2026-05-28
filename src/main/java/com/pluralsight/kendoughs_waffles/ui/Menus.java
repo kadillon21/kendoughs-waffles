@@ -1,6 +1,6 @@
 package com.pluralsight.kendoughs_waffles.ui;
 
-import com.pluralsight.kendoughs_waffles.models.Order;
+import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;

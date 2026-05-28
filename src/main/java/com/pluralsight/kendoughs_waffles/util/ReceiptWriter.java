@@ -1,8 +1,8 @@
 package com.pluralsight.kendoughs_waffles.util;
 
-import com.pluralsight.kendoughs_waffles.models.Order;
-import com.pluralsight.kendoughs_waffles.models.OrderItemRequest;
-import com.pluralsight.kendoughs_waffles.models.OrderRequest;
+import com.pluralsight.kendoughs_waffles.models.products.order.Order;
+import com.pluralsight.kendoughs_waffles.models.products.order.OrderItemRequest;
+import com.pluralsight.kendoughs_waffles.models.products.order.OrderRequest;
 
 
 import java.io.BufferedWriter;

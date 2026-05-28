@@ -2,7 +2,7 @@ package com.pluralsight.kendoughs_waffles.controllers;
 
 import com.pluralsight.kendoughs_waffles.models.enums.*;
 import com.pluralsight.kendoughs_waffles.models.products.*;
-import com.pluralsight.kendoughs_waffles.models.Order;
+import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
 import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
 import com.pluralsight.kendoughs_waffles.repositories.SideRepository;

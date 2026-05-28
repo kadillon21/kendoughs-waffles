@@ -1,6 +1,6 @@
 package com.pluralsight.kendoughs_waffles.services;
 
-import com.pluralsight.kendoughs_waffles.models.Order;
+import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.models.products.Drink;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.models.products.Side;

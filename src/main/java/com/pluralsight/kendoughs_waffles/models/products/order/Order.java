@@ -1,16 +1,18 @@
-package com.pluralsight.kendoughs_waffles.models;
+package com.pluralsight.kendoughs_waffles.models.products.order;
 
 import com.pluralsight.kendoughs_waffles.models.products.Product;
 
 import java.util.List;
 
 public class Order {
+    // Variables used to store the order details
     private int id;
     private String customerName;
     private String customerEmail;
     private String customerPhone;
     private List<Product> products;
 
+    // Constructor
     public Order(int id, String customerName, String customerEmail, String customerPhone, List<Product> products) {
         this.id = id;
         this.customerName = customerName;
@@ -19,6 +21,7 @@ public class Order {
         this.products = products;
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -55,6 +58,7 @@ public class Order {
         products.add(product);
     }
 
+    // Methods to calculate the subtotal and total
     public double calcSubTotal() {
         double total = 0;
         for(Product product : products) {
@@ -73,6 +77,7 @@ public class Order {
         return total + salesTax;
     }
 
+    // Method to print the order details
     public String printOrder() {
         StringBuilder sb = new StringBuilder();
         int i = 0;
