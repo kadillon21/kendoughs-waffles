@@ -10,7 +10,7 @@ import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassicKen extends SignatureWaffle{
+public class ClassicKen extends SignatureWaffle {
 
 
     public ClassicKen(List<Topping> toppings) {

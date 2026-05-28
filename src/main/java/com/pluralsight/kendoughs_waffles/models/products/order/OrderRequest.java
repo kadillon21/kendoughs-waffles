@@ -8,8 +8,19 @@ public class OrderRequest {
     private double total;
 
     // Getters and setters
-    public List<OrderItemRequest> getItems() { return items; }
-    public void setItems(List<OrderItemRequest> items) { this.items = items; }
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+    public List<OrderItemRequest> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItemRequest> items) {
+        this.items = items;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

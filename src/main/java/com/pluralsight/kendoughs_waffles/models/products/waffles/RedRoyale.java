@@ -7,7 +7,6 @@ import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.PremiumTopping;
 import com.pluralsight.kendoughs_waffles.models.products.Topping;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class RedRoyale extends SignatureWaffle {
                 FillFlavor.NONE,
                 "A bold red velvet waffle stuffed with cream cheese, crowned with a scoop of ice cream, fresh blueberries, and cookie butter. Dessert for breakfast — no apologies."
         );
-        PremiumTopping iceCream = new PremiumTopping(ToppingName.ICE_CREAM,  100, true);
+        PremiumTopping iceCream = new PremiumTopping(ToppingName.ICE_CREAM, 100, true);
         PremiumTopping freshBlueberries = new PremiumTopping(ToppingName.FRESH_BLUEBERRIES, 100, true);
         PremiumTopping cookieButter = new PremiumTopping(ToppingName.COOKIE_BUTTER, 100, true);
         getToppings().add(iceCream);

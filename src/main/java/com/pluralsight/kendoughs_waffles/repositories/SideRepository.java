@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface SideRepository extends JpaRepository<Side, Integer> {
     // Returns all available sides
     List<Side> findAllByIsAvailable(boolean isAvailable);
+
     // Returns a side by type and availability
     Optional<Side> findBySideTypeAndIsAvailable(SideType sideType, boolean isAvailable);
 }

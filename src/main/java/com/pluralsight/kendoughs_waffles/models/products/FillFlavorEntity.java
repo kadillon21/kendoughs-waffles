@@ -23,10 +23,27 @@ public class FillFlavorEntity {
 
     }
 
-    public int getId() { return id; }
-    public FillFlavor getFillFlavor() { return fillFlavor; }
-    public int getStockCount() { return stockCount; }
-    public boolean isAvailable() { return isAvailable; }
-    public void setStockCount(int stockCount) { this.stockCount = stockCount; }
-    public void setAvailable(boolean isAvailable) { this.isAvailable = isAvailable; }
+    public int getId() {
+        return id;
+    }
+
+    public FillFlavor getFillFlavor() {
+        return fillFlavor;
+    }
+
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 }

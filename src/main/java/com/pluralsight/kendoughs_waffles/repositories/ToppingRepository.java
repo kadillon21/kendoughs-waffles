@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface ToppingRepository extends JpaRepository<Topping, Integer> {
     // Returns all available toppings
     List<Topping> findAllByIsAvailable(boolean isAvailable);
+
     // Returns a topping by name and availability
     Optional<Topping> findByNameAndIsAvailable(ToppingName name, boolean isAvailable);
 }

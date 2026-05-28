@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface WaffleSizeRepository extends JpaRepository<WaffleSizeEntity, Integer> {
     // Returns all available waffle sizes
     List<WaffleSizeEntity> findAllByIsAvailable(boolean isAvailable);
+
     // Returns a waffle size entity by size enum value and availability
     Optional<WaffleSizeEntity> findByWaffleSizeAndIsAvailable(WaffleSize waffleSize, boolean isAvailable);
 }

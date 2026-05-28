@@ -19,14 +19,31 @@ public class WaffleTypeEntity {
     private int stockCount;
     private boolean isAvailable;
 
-    public WaffleTypeEntity(){
+    public WaffleTypeEntity() {
 
     }
 
-    public int getId() { return id; }
-    public WaffleType getWaffleType() { return waffleType; }
-    public int getStockCount() { return stockCount; }
-    public boolean isAvailable() { return isAvailable; }
-    public void setStockCount(int stockCount) { this.stockCount = stockCount; }
-    public void setAvailable(boolean isAvailable) { this.isAvailable = isAvailable; }
+    public int getId() {
+        return id;
+    }
+
+    public WaffleType getWaffleType() {
+        return waffleType;
+    }
+
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 }

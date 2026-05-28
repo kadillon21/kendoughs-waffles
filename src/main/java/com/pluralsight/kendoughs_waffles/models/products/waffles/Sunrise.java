@@ -11,7 +11,7 @@ import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sunrise extends SignatureWaffle{
+public class Sunrise extends SignatureWaffle {
 
     public Sunrise(List<Topping> toppings) {
         super(

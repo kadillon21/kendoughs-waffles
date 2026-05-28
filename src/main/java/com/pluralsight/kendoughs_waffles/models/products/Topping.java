@@ -37,9 +37,17 @@ public abstract class Topping {
 
     }
 
-    public int getStockCount() { return stockCount; }
-    public void setStockCount(int stockCount) { this.stockCount = stockCount; }
-    public void setAvailable(boolean isAvailable) { this.isAvailable = isAvailable; }
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 
     public double getPrice() {
         return price;

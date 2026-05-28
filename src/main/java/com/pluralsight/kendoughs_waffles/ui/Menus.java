@@ -1,12 +1,12 @@
 package com.pluralsight.kendoughs_waffles.ui;
 
-import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.ToppingName;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleSize;
 import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
 import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.models.products.Topping;
+import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
 
 import java.text.NumberFormat;
@@ -80,14 +80,14 @@ public class Menus {
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + Bo + A + "Type:        " + R + type + R + messagePadding("Type:    " + type, 27) + B + "║");
         System.out.println(B + "║  " + Bo + A + "Size:        " + R + size + R + messagePadding("Size:    " + size, 27) + B + "║");
-        System.out.println(B + "║  " + Bo + A + "Filling:        " + R + filling.label + R + messagePadding("Filling:    " + filling.label , 27)+ B + "║");
+        System.out.println(B + "║  " + Bo + A + "Filling:        " + R + filling.label + R + messagePadding("Filling:    " + filling.label, 27) + B + "║");
         System.out.println(B + "║  " + Bo + A + "Toppings:" + R + "                      " + B + "║");
-        for (Topping topping : toppings){
-            String padding = messagePadding(topping.getLabel().toString(), 31);
+        for (Topping topping : toppings) {
+            String padding = messagePadding(topping.getLabel().toString(), 26);
             System.out.println(B + "║  " + R + "\t" + topping.getLabel() + B + padding + "║");
         }
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Waffle Price        " + R + money.format(price) + messagePadding("Waffle Price        " + R + money.format(price) , 34) + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Waffle Price        " + R + money.format(price) + messagePadding("Waffle Price        " + R + money.format(price), 35) + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
@@ -134,7 +134,7 @@ public class Menus {
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
-    public static void customWaffleFillingMenu(){
+    public static void customWaffleFillingMenu() {
         System.out.println();
         System.out.println(B + "╔═════════════════════════════════╗");
         System.out.println(B + "║" + Bo + U + R + "        Choose Your Filling      " + R + B + "║");
@@ -159,20 +159,20 @@ public class Menus {
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + Bo + A + "Regular" + R + "  " + A + "+$0.50 each" + R + "           " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.WHIPPED_CREAM)   + A + "1"  + R + ")  Whipped Cream            " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.POWDERED_SUGAR)  + A + "2"  + R + ")  Powdered Sugar           " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.MAPLE_SYRUP)     + A + "3"  + R + ")  Maple Syrup              " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.CINNAMON)        + A + "4"  + R + ")  Cinnamon                 " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.BUTTER)          + A + "5"  + R + ")  Butter                   " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.CARAMEL_DRIZZLE) + A + "6"  + R + ")  Caramel Drizzle          " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.WHIPPED_CREAM) + A + "1" + R + ")  Whipped Cream            " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.POWDERED_SUGAR) + A + "2" + R + ")  Powdered Sugar           " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.MAPLE_SYRUP) + A + "3" + R + ")  Maple Syrup              " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.CINNAMON) + A + "4" + R + ")  Cinnamon                 " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.BUTTER) + A + "5" + R + ")  Butter                   " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.CARAMEL_DRIZZLE) + A + "6" + R + ")  Caramel Drizzle          " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + Bo + A + "Premium" + R + "  " + A + "+$1.00 each" + R + "           " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.NUTELLA)             + A + "7"  + R + ")  Nutella                  " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_STRAWBERRIES)  + A + "8"  + R + ")  Fresh Strawberries       " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.BACON_CRUMBLES)      + A + "9"  + R + ")  Bacon Crumbles           " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.ICE_CREAM)           + A + "10" + R + ") Ice Cream                " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_BLUEBERRIES)   + A + "11" + R + ") Fresh Blueberries        " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.COOKIE_BUTTER)       + A + "12" + R + ") Cookie Butter            " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.NUTELLA) + A + "7" + R + ")  Nutella                  " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_STRAWBERRIES) + A + "8" + R + ")  Fresh Strawberries       " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.BACON_CRUMBLES) + A + "9" + R + ")  Bacon Crumbles           " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.ICE_CREAM) + A + "10" + R + ") Ice Cream                " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_BLUEBERRIES) + A + "11" + R + ") Fresh Blueberries        " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.COOKIE_BUTTER) + A + "12" + R + ") Cookie Butter            " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "D" + R + ")  Done selecting             " + B + "║");
         System.out.println(B + "║                                 ║");
@@ -198,7 +198,7 @@ public class Menus {
             System.out.println(B + "║  No toppings added yet.         " + B + "║");
         } else {
             int i = 0;
-            for (Topping topping : selected){
+            for (Topping topping : selected) {
                 i++;
                 String padding = messagePadding(topping.getLabel().toString(), 22);
                 System.out.println(B + "║  " + R + "\t" + i + ") " + topping.getLabel() + B + padding + "║");
@@ -267,7 +267,7 @@ public class Menus {
         System.out.println(B + "╠═══════════════════════════════════════════╣");
         System.out.println(B + "║                                           ║");
 
-        for (Product product : products){
+        for (Product product : products) {
             String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 41);
             System.out.println(B + "║  " + R + product.getName() + " - " + money.format(product.getPrice()) + B + padding + "║");
         }
@@ -302,6 +302,7 @@ public class Menus {
         System.out.println(B + "║                                                    ║");
         System.out.println(B + "╚════════════════════════════════════════════════════╝" + R);
     }
+
     public static void displayStoreMenu() {
         System.out.println();
         System.out.println(B + "╔══════════════════════════════════════════════╗");
@@ -404,7 +405,7 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "         Current Order           " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        for (Product product : products){
+        for (Product product : products) {
             String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 31);
             System.out.println(B + "║  " + R + product.getName() + " - " + money.format(product.getPrice()) + B + padding + "║");
         }
@@ -475,19 +476,19 @@ public class Menus {
         System.out.println(B + "╚══════════════════════════════════════════════════════╝" + R);
     }
 
-    public static void receiptDisplayMenu(List<String> receipt){
+    public static void receiptDisplayMenu(List<String> receipt) {
         System.out.println(B + "╔══════════════════════════════════════════════════════╗");
         System.out.println(B + "║" + Bo + U + R + "                   Receipt                            " + R + B + "║");
         System.out.println(B + "╠══════════════════════════════════════════════════════╣");
-        for (String line : receipt){
+        for (String line : receipt) {
             System.out.println(B + "║  " + R + line + B + messagePadding(line, 52) + "║");
         }
         System.out.println(B + "╚══════════════════════════════════════════════════════╝" + R);
     }
 
     // Helper method that adds padding to menu lines that have unpredictable length
-    private static String messagePadding(String string, int length){
-        if (string.length() < length){
+    private static String messagePadding(String string, int length) {
+        if (string.length() < length) {
             int padding = length - string.length();
             return " ".repeat(padding);
         }

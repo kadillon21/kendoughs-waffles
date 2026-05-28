@@ -7,7 +7,7 @@ import com.pluralsight.kendoughs_waffles.models.products.Topping;
 
 import java.util.List;
 
-public class SignatureWaffle extends Waffle{
+public class SignatureWaffle extends Waffle {
     private final String description;
 
     public SignatureWaffle(String name, double price, WaffleType waffleType, WaffleSize waffleSize, List<Topping> toppings, FillFlavor fillFlavor, String description) {

@@ -11,7 +11,7 @@ import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NutellaDream extends SignatureWaffle{
+public class NutellaDream extends SignatureWaffle {
     public NutellaDream(List<Topping> toppings) {
         super(
                 "The Nutella Dream",

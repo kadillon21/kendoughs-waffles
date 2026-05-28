@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface FillFlavorRepository extends JpaRepository<FillFlavorEntity, Integer> {
     // Returns all available fill flavors
     List<FillFlavorEntity> findAllByIsAvailable(boolean isAvailable);
+
     // Returns a fill flavor entity by flavor enum value and availability
     Optional<FillFlavorEntity> findByFillFlavorAndIsAvailable(FillFlavor fillFlavor, boolean isAvailable);
 }

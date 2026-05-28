@@ -12,7 +12,7 @@ import java.util.List;
 public class Waffle extends Product {
     private WaffleType waffleType;
     private WaffleSize waffleSize;
-    private List<Topping> toppings;
+    private final List<Topping> toppings;
     private boolean isStuffed;
     private FillFlavor fillFlavor;
 
@@ -25,7 +25,7 @@ public class Waffle extends Product {
     }
 
     @Override
-    public double getPrice(){
+    public double getPrice() {
         double totalPrice = waffleSize.getPrice() + waffleType.getPrice() + fillFlavor.getPrice();
         for (Topping topping : toppings) {
             totalPrice += topping.getExtraCost();
@@ -42,12 +42,12 @@ public class Waffle extends Product {
         StringBuilder sb = new StringBuilder();
         NumberFormat money = NumberFormat.getCurrencyInstance();
         sb.append(this.getName()).append(" - ").append(money.format(this.getPrice())).append("\n");
-        sb.append("\tType: ").append(waffleType.getLabel()).append(" ").append(money.format(waffleType.getPrice())).append("\n");
-        sb.append("\tSize: ").append(waffleSize.getLabel()).append(" ").append(money.format(waffleSize.getPrice())).append("\n");
-        sb.append("\tFilling: ").append(fillFlavor.getLabel()).append(" ").append(money.format(fillFlavor.getPrice())).append("\n");
-        sb.append("\tToppings: \n");
+        sb.append("    Type: ").append(waffleType.getLabel()).append(" ").append(money.format(waffleType.getPrice())).append("\n");
+        sb.append("    Size: ").append(waffleSize.getLabel()).append(" ").append(money.format(waffleSize.getPrice())).append("\n");
+        sb.append("    Filling: ").append(fillFlavor.getLabel()).append(" ").append(money.format(fillFlavor.getPrice())).append("\n");
+        sb.append("    Toppings: \n");
         for (Topping topping : toppings) {
-            sb.append("\t    ").append(topping.getLabel()).append(" ").append(money.format(topping.getExtraCost())).append("\n");
+            sb.append("        ").append(topping.getLabel()).append(" ").append(money.format(topping.getExtraCost())).append("\n");
         }
         return sb.toString();
     }

@@ -16,7 +16,7 @@ public class ReceiptGetter {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
 
-            while ((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 receipt.add(line);
             }
         } catch (IOException e) {

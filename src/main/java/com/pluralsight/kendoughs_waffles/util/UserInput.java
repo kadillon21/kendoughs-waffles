@@ -1,14 +1,13 @@
 package com.pluralsight.kendoughs_waffles.util;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
     static Scanner scanner = new Scanner(System.in); // Only instance of scanner being called in program
     public static final String arrow = ConsoleUtilities.ACCENT + "❯ " + ConsoleUtilities.RESET; // Arrow key used
 
-    public UserInput(){
+    public UserInput() {
 
     }
 
@@ -24,7 +23,7 @@ public class UserInput {
 
         while (!inputValid) {
             input = scanner.nextLine(); // Takes in user input as a String
-            try{
+            try {
                 value = Integer.parseInt(input); // tries to parse string into an int
                 // if statements verify if parsed int meets the required minimums and maximum
                 // Keeps looping until inputValid is = true
@@ -39,7 +38,7 @@ public class UserInput {
                     System.out.println(" The value you entered was too high...");
                     System.out.print(prompt);
                 }
-            } catch(Exception e) { // Tells user that the input provided was not valid.
+            } catch (Exception e) { // Tells user that the input provided was not valid.
                 System.out.print(ConsoleUtilities.ERROR);
                 System.out.println("You did not provide a valid input try again...");
                 System.out.print(prompt);
@@ -100,7 +99,7 @@ public class UserInput {
                     System.out.println(" The value you entered was too high...");
                     System.out.print(prompt);
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.print(ConsoleUtilities.ERROR);
                 System.out.println("You did not provide a valid input try again...");
                 System.out.print(prompt);
@@ -160,7 +159,7 @@ public class UserInput {
                     break;
                 }
             }
-            if(!inputValid){
+            if (!inputValid) {
                 System.out.println(ConsoleUtilities.ERROR + "Invalid choice... Try again");
                 System.out.println(prompt);
             }
@@ -169,7 +168,7 @@ public class UserInput {
     }
 
     // Prompts user for a String and validates that an actual character was provided
-    public static char promptForChar(String prompt){
+    public static char promptForChar(String prompt) {
         char returnValue = 0;
         boolean inputValid = false;
         prompt += arrow;
@@ -202,20 +201,20 @@ public class UserInput {
 
 
     // Prompts user for a date and takes it in as a String and attempts to parse it into a LocalDate variable and returns that variable
-    public static LocalDate promptForDate(String prompt){
+    public static LocalDate promptForDate(String prompt) {
         boolean inputValid = false;
         prompt += arrow;
         System.out.print(prompt);
         LocalDate date = LocalDate.now(); // Creates local date variable
 
-        while (!inputValid){
+        while (!inputValid) {
             String input = scanner.nextLine();
             try {
                 date = LocalDate.parse(input);
                 inputValid = true;
                 return date;
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.print(ConsoleUtilities.ERROR);
                 System.out.println(" You did not enter a valid date try again...");
                 System.out.println(prompt);

@@ -1,12 +1,10 @@
 package com.pluralsight.kendoughs_waffles.controllers;
 
 import com.pluralsight.kendoughs_waffles.models.enums.*;
-import com.pluralsight.kendoughs_waffles.models.products.*;
+import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
-import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
-import com.pluralsight.kendoughs_waffles.repositories.SideRepository;
-import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
+import com.pluralsight.kendoughs_waffles.repositories.*;
 import com.pluralsight.kendoughs_waffles.services.OrderService;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
@@ -35,11 +33,21 @@ public class AppController {
     private ToppingRepository toppingRepository;
 
     @Autowired
+    private WaffleTypeRepository waffleTypeRepository;
+
+    @Autowired
+    private WaffleSizeRepository waffleSizeRepository;
+
+    @Autowired
+    private FillFlavorRepository fillFlavorRepository;
+
+    @Autowired
     private OrderService orderService;
 
     // Run the application
     public void run() throws IOException {
         handleMainMenu();
+
     }
 
     // Method to handle the main menu
@@ -66,19 +74,30 @@ public class AppController {
     private void receiptLookUp() {
         int userOrder = UserInput.promptForInt("What is your four digit order number? ", 1, 9999);
 
+        // Create a folder to store receipts if it doesn't exist'
         File folder = new File("receipts");
-        File[] listOfFiles = folder.listFiles();
+        File[] listOfFiles = folder.listFiles(); // Get a list of files in the folder
         String lookup = "Order-" + String.format("%04d", userOrder);
         boolean found = false;
 
+        // Checks if the folder is empty
         if (listOfFiles != null) {
+            // Loop through the files in the folder
             for (File file : listOfFiles) {
                 if (file.getName().contains(lookup)) {
                     String filepath = file.getName();
                     found = true;
                     try {
-                        System.out.println("test");
+                        // Print the receipt
                         Menus.receiptDisplayMenu(ReceiptGetter.getReceipt(filepath));
+                        boolean viewingReceipt = true;
+                        while (viewingReceipt) {
+                            switch (UserInput.promptForChar("Press X to return to the main menu ")) {
+                                case 'X' -> viewingReceipt = false;
+                                default ->
+                                        System.out.println(ConsoleUtilities.DANGER + "Invalid input. Please enter X to return to the main menu." + ConsoleUtilities.RESET);
+                            }
+                        }
                     } catch (IOException e) {
                         System.out.println("Error reading receipt file.");
                     }
@@ -100,7 +119,8 @@ public class AppController {
     private void handleOrderMenu() throws IOException {
         ConsoleUtilities.clearScreen("Loading Order Menu...");
         boolean onOrderMenu = true;
-        Order order = new Order(1, "Kendall", "kadillon21@gmail.com", "773-383-8814", new ArrayList<>());
+        Order order = new Order(1, null, null, null, new ArrayList<>());
+        // Sets the user information for the order
         getUserInformation(order);
         ConsoleUtilities.clearScreen("Saving user information...");
         while (onOrderMenu) {
@@ -134,7 +154,6 @@ public class AppController {
                 }
                 case '2' -> {
                     if (!handleSignatureWaffleMenu(order)) onWaffleMenu = false;
-                    ConsoleUtilities.clearScreen("Adding...");
                 }
                 case '3' -> handleDailySpecial(order);
                 case 'X' -> onWaffleMenu = false;
@@ -149,30 +168,48 @@ public class AppController {
         while (onDailySpecial) {
             Menus.dailySpecialMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
+                // Adds daily special to order if available
                 case '1' -> {
-                    if (Menus.getDailySpecial().equals("Classic Ken")) {
-                        List<Topping> toppings = new ArrayList<>();
-                        addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
-                        addToppingToList(toppings, ToppingName.BUTTER);
-                        order.addProduct(new ClassicKen(toppings));
-                    } else if (Menus.getDailySpecial().equals("Nutella Dream")) {
-                        List<Topping> toppings = new ArrayList<>();
-                        addToppingToList(toppings, ToppingName.NUTELLA);
-                        addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
-                        addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
-                        order.addProduct(new NutellaDream(toppings));
-                    } else if (Menus.getDailySpecial().equals("Sunrise")) {
-                        List<Topping> toppings = new ArrayList<>();
-                        addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
-                        addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
-                        addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
-                        order.addProduct(new Sunrise(toppings));
-                    } else if (Menus.getDailySpecial().equals("Red Royale")) {
-                        List<Topping> toppings = new ArrayList<>();
-                        addToppingToList(toppings, ToppingName.ICE_CREAM);
-                        addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
-                        addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
-                        order.addProduct(new RedRoyale(toppings));
+                    String special = Menus.getDailySpecial();
+                    if (special.equals("The Classic Ken")) {
+                        if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.BUTTER_MILK, true).isPresent()) {
+                            List<Topping> toppings = new ArrayList<>();
+                            addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                            addToppingToList(toppings, ToppingName.BUTTER);
+                            order.addProduct(new ClassicKen(toppings));
+                        } else {
+                            System.out.println(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                        }
+                    } else if (special.equals("The Nutella Dream")) {
+                        if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.BELGIAN, true).isPresent()) {
+                            List<Topping> toppings = new ArrayList<>();
+                            addToppingToList(toppings, ToppingName.NUTELLA);
+                            addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
+                            addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
+                            order.addProduct(new NutellaDream(toppings));
+                        } else {
+                            System.out.println(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                        }
+                    } else if (special.equals("The Sunrise")) {
+                        if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.CHURRO, true).isPresent()) {
+                            List<Topping> toppings = new ArrayList<>();
+                            addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
+                            addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                            addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
+                            order.addProduct(new Sunrise(toppings));
+                        } else {
+                            System.out.println(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                        }
+                    } else if (special.equals("The Red Royale")) {
+                        if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.RED_VELVET, true).isPresent()) {
+                            List<Topping> toppings = new ArrayList<>();
+                            addToppingToList(toppings, ToppingName.ICE_CREAM);
+                            addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
+                            addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
+                            order.addProduct(new RedRoyale(toppings));
+                        } else {
+                            System.out.println(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                        }
                     }
                     onDailySpecial = false;
                 }
@@ -188,36 +225,57 @@ public class AppController {
         while (onSignatureWaffleMenu) {
             Menus.signatureWaffleMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
+                // Adds signature waffle to order if available
                 case '1' -> {
-                    List<Topping> toppings = new ArrayList<>();
-                    addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
-                    addToppingToList(toppings, ToppingName.BUTTER);
-                    order.addProduct(new ClassicKen(toppings));
-                    onSignatureWaffleMenu = false;
+                    if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.BUTTER_MILK, true).isPresent()) {
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                        addToppingToList(toppings, ToppingName.BUTTER);
+                        order.addProduct(new ClassicKen(toppings));
+                        onSignatureWaffleMenu = false;
+                        ConsoleUtilities.clearScreen("Adding Classic Ken waffle to order...");
+                    } else {
+                        ConsoleUtilities.clearScreen(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                    }
                 }
                 case '2' -> {
-                    List<Topping> toppings = new ArrayList<>();
-                    addToppingToList(toppings, ToppingName.NUTELLA);
-                    addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
-                    addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
-                    order.addProduct(new NutellaDream(toppings));
-                    onSignatureWaffleMenu = false;
+                    if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.BELGIAN, true).isPresent()) {
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.NUTELLA);
+                        addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
+                        addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
+                        order.addProduct(new NutellaDream(toppings));
+                        onSignatureWaffleMenu = false;
+                        ConsoleUtilities.clearScreen("Adding Nutella Dream waffle to order...");
+                    } else {
+                        ConsoleUtilities.clearScreen(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                    }
                 }
                 case '3' -> {
-                    List<Topping> toppings = new ArrayList<>();
-                    addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
-                    addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
-                    addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
-                    order.addProduct(new Sunrise(toppings));
-                    onSignatureWaffleMenu = false;
+                    if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.CHURRO, true).isPresent()) {
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
+                        addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                        addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
+                        order.addProduct(new Sunrise(toppings));
+                        onSignatureWaffleMenu = false;
+                        ConsoleUtilities.clearScreen("Adding Sunrise waffle to order...");
+                    } else {
+                        ConsoleUtilities.clearScreen(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                    }
                 }
                 case '4' -> {
-                    List<Topping> toppings = new ArrayList<>();
-                    addToppingToList(toppings, ToppingName.ICE_CREAM);
-                    addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
-                    addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
-                    order.addProduct(new RedRoyale(toppings));
-                    onSignatureWaffleMenu = false;
+                    if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(WaffleType.RED_VELVET, true).isPresent()) {
+                        List<Topping> toppings = new ArrayList<>();
+                        addToppingToList(toppings, ToppingName.ICE_CREAM);
+                        addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
+                        addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
+                        order.addProduct(new RedRoyale(toppings));
+                        onSignatureWaffleMenu = false;
+                        ConsoleUtilities.clearScreen("Adding Red Royale waffle to order...");
+                    } else {
+                        ConsoleUtilities.clearScreen(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+                    }
                 }
                 case 'X' -> onSignatureWaffleMenu = false;
             }
@@ -268,43 +326,65 @@ public class AppController {
     private WaffleType handleCustomWaffleTypeMenu(Order order, Waffle waffle) {
         ConsoleUtilities.clearScreen("Loading Custom Waffle Type Menu...");
         Menus.customWaffleTypeMenu();
-        return switch (UserInput.promptForChar("What would you like to do? ", "12345X")) {
+        char choice = UserInput.promptForChar("What would you like to do? ", "12345X");
+        if (choice == 'X') return waffle.getType();
+        WaffleType selected = switch (choice) {
             case '1' -> WaffleType.BUTTER_MILK;
             case '2' -> WaffleType.BELGIAN;
             case '3' -> WaffleType.LIEGE;
             case '4' -> WaffleType.CHURRO;
             case '5' -> WaffleType.RED_VELVET;
-            case 'X' -> waffle.getType();
-            default -> handleCustomWaffleTypeMenu(order, waffle);
+            default -> null;
         };
+        if (selected == null) return handleCustomWaffleTypeMenu(order, waffle);
+        if (waffleTypeRepository.findByWaffleTypeAndIsAvailable(selected, true).isPresent()) {
+            return selected;
+        }
+        System.out.println(ConsoleUtilities.DANGER + "Sorry, that waffle type is unavailable." + ConsoleUtilities.RESET);
+        return waffle.getType();
     }
 
     // Method returns waffle size based on user input
     private WaffleSize handleCustomWaffleSizeMenu(Order order, Waffle waffle) {
         ConsoleUtilities.clearScreen("Loading Custom Waffle Size Menu...");
         Menus.customWaffleSizeMenu();
-        return switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
+        char choice = UserInput.promptForChar("What would you like to do? ", "123X");
+        if (choice == 'X') return waffle.getSize();
+        WaffleSize selected = switch (choice) {
             case '1' -> WaffleSize.MINI;
             case '2' -> WaffleSize.REGULAR;
             case '3' -> WaffleSize.LARGE;
-            case 'X' -> waffle.getSize();
-            default -> handleCustomWaffleSizeMenu(order, waffle);
+            default -> null;
         };
+        if (selected == null) return handleCustomWaffleSizeMenu(order, waffle);
+        if (waffleSizeRepository.findByWaffleSizeAndIsAvailable(selected, true).isPresent()) {
+            return selected;
+        }
+        System.out.println(ConsoleUtilities.DANGER + "Sorry, that waffle size is unavailable." + ConsoleUtilities.RESET);
+        return waffle.getSize();
     }
 
     // Method to handle creating a custom waffle
     private FillFlavor handleCustomWaffleFillFlavorMenu(Order order, Waffle waffle) {
         ConsoleUtilities.clearScreen("Loading Custom Waffle Fill Flavor Menu...");
         Menus.customWaffleFillingMenu();
-        return switch (UserInput.promptForChar("What type of filling do you want? ", "12345X")) {
+        char choice = UserInput.promptForChar("What type of filling do you want? ", "12345X");
+        FillFlavor selected = switch (choice) {
             case '1' -> FillFlavor.NONE;
             case '2' -> FillFlavor.NUTELLA;
             case '3' -> FillFlavor.CREAM_CHEESE;
             case '4' -> FillFlavor.JAM;
             case '5' -> FillFlavor.STRAWBERRY;
             case 'X' -> waffle.getFilling();
-            default -> handleCustomWaffleFillFlavorMenu(order, waffle);
+            default -> null;
         };
+        if (selected == null) return handleCustomWaffleFillFlavorMenu(order, waffle);
+        if (selected == FillFlavor.NONE) return selected;
+        if (fillFlavorRepository.findByFillFlavorAndIsAvailable(selected, true).isPresent()) {
+            return selected;
+        }
+        System.out.println(ConsoleUtilities.DANGER + "Sorry, that filling is unavailable." + ConsoleUtilities.RESET);
+        return waffle.getFilling();
     }
 
     // Method allow users to select toppings to add to a custom waffle
@@ -315,7 +395,7 @@ public class AppController {
         String[] validMenuOptions = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "D"};
         while (onCustomWaffleToppingsMenu) {
             Menus.customWaffleToppingsMenu(toppings);
-            switch (UserInput.promptForString("What toppings would you like? ", validMenuOptions)) {
+            switch (UserInput.promptForString("What toppings would you like? ", validMenuOptions).toUpperCase()) {
                 case "1" -> addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
                 case "2" -> addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
                 case "3" -> addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
@@ -473,7 +553,10 @@ public class AppController {
                     onViewCurrentOrder = false;
                     handleRemoveItemMenu(order);
                 }
-                case 'X' -> onViewCurrentOrder = false;
+                case 'X' -> {
+                    ConsoleUtilities.clearScreen("Returning...");
+                    onViewCurrentOrder = false;
+                }
             }
         }
     }
@@ -514,6 +597,14 @@ public class AppController {
                         printReceipt(order);
                         ConsoleUtilities.clearScreen("Processing your order...");
                         onCheckoutMenu = false;
+                        boolean viewingMessage = true;
+                        while (viewingMessage) {
+
+                            if (UserInput.promptForChar("Your receipt number is " + ReceiptWriter.getCurrentOrderNumber() + "... \nPress X to exit ", "X") == 'X') {
+                                viewingMessage = false;
+                                ConsoleUtilities.clearScreen("Returning...");
+                            }
+                        }
                         return false;
                     }
                 }

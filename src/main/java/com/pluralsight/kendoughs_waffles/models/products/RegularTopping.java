@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 @Entity
 // Tells JPA that this class is a subclass of Topping and to use the "REGULAR" discriminator value
 @DiscriminatorValue("REGULAR")
-public class RegularTopping extends Topping{
+public class RegularTopping extends Topping {
 
     public RegularTopping(ToppingName name, int stockCount, boolean isAvailable) {
         super(name, .5, stockCount, isAvailable);

@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface WaffleTypeRepository extends JpaRepository<WaffleTypeEntity, Integer> {
     // Returns all available waffle types
     List<WaffleTypeEntity> findAllByIsAvailable(boolean isAvailable);
+
     // Returns a waffle type entity by type enum value and availability
     Optional<WaffleTypeEntity> findByWaffleTypeAndIsAvailable(WaffleType waffleType, boolean isAvailable);
 }

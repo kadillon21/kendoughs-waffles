@@ -1,7 +1,9 @@
 package com.pluralsight.kendoughs_waffles.models.products;
 
 import com.pluralsight.kendoughs_waffles.models.enums.SideType;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.text.NumberFormat;
 
@@ -26,9 +28,17 @@ public class Side extends Product {
         this.isAvailable = isAvailable;
     }
 
-    public int getStockCount() { return stockCount; }
-    public void setStockCount(int stockCount) { this.stockCount = stockCount; }
-    public void setAvailable(boolean isAvailable) { this.isAvailable = isAvailable; }
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 
     @Override
     public String printDetails() {

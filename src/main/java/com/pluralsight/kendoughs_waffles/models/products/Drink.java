@@ -2,7 +2,9 @@ package com.pluralsight.kendoughs_waffles.models.products;
 
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkFlavor;
 import com.pluralsight.kendoughs_waffles.models.enums.DrinkSize;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.text.NumberFormat;
 
@@ -32,9 +34,17 @@ public class Drink extends Product {
     }
 
     // Getters and Setters
-    public int getStockCount() { return stockCount; }
-    public void setStockCount(int stockCount) { this.stockCount = stockCount; }
-    public void setAvailable(boolean isAvailable) { this.isAvailable = isAvailable; }
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 
     // Method to print details of the drink
     @Override
