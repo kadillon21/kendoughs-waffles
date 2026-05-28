@@ -9,8 +9,8 @@ public enum FillFlavor {
     STRAWBERRY("Strawberry", 1.5);
 
     // Declared label and price for enum values
-    public final String label;
-    public final double price;
+    private final String label;
+    private final double price;
 
     // Constructor
     FillFlavor(String label, double price) {

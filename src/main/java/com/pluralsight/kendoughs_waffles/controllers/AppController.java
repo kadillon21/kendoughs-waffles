@@ -4,9 +4,7 @@ import com.pluralsight.kendoughs_waffles.models.enums.*;
 import com.pluralsight.kendoughs_waffles.models.products.*;
 import com.pluralsight.kendoughs_waffles.models.products.order.Order;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.*;
-import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
-import com.pluralsight.kendoughs_waffles.repositories.SideRepository;
-import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
+import com.pluralsight.kendoughs_waffles.repositories.*;
 import com.pluralsight.kendoughs_waffles.services.OrderService;
 import com.pluralsight.kendoughs_waffles.ui.Menus;
 import com.pluralsight.kendoughs_waffles.util.ConsoleUtilities;
@@ -36,6 +34,12 @@ public class AppController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private WaffleSizeRepository waffleSizeRepository;
+
+    @Autowired
+    private WaffleTypeRepository waffleTypeRepository;
 
     // Run the application
     public void run() throws IOException {
@@ -508,7 +512,7 @@ public class AppController {
             switch (UserInput.promptForChar("What would you like to do? ", "CBX")) {
                 case 'C' -> {
                     if (order.getProducts().isEmpty()) {
-                        System.out.println(ConsoleUtilities.DANGER + "Your order is empty." + ConsoleUtilities.RESET);
+                        System.out.println(ConsoleUtilities.DANGER + "Your order is empty, you must purchase either a side or drink" + ConsoleUtilities.RESET);
                         onCheckoutMenu = false;
                     } else {
                         printReceipt(order);

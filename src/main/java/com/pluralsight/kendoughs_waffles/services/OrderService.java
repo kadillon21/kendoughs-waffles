@@ -6,9 +6,7 @@ import com.pluralsight.kendoughs_waffles.models.products.Product;
 import com.pluralsight.kendoughs_waffles.models.products.Side;
 import com.pluralsight.kendoughs_waffles.models.products.Topping;
 import com.pluralsight.kendoughs_waffles.models.products.waffles.Waffle;
-import com.pluralsight.kendoughs_waffles.repositories.DrinkRepository;
-import com.pluralsight.kendoughs_waffles.repositories.SideRepository;
-import com.pluralsight.kendoughs_waffles.repositories.ToppingRepository;
+import com.pluralsight.kendoughs_waffles.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,12 @@ public class OrderService {
 
     @Autowired
     private ToppingRepository toppingRepository;
+
+    @Autowired
+    private WaffleSizeRepository waffleSizeRepository;
+
+    @Autowired
+    private WaffleTypeRepository waffleTypeRepository;
 
     @Transactional
     public void updateStock(Order order) {
@@ -46,6 +50,27 @@ public class OrderService {
                         toppingRepository.save(t);
                     });
                 }
+            } else if (product instanceof Waffle waffle) {
+                // Decrement topping stock
+                for (Topping topping : waffle.getToppings()) {
+                    toppingRepository.findById(topping.getId()).ifPresent(t -> {
+                        t.setStockCount(t.getStockCount() - 1);
+                        if (t.getStockCount() <= 0) t.setAvailable(false);
+                        toppingRepository.save(t);
+                    });
+                }
+                // Decrement waffle type stock
+                waffleTypeRepository.findByWaffleTypeAndIsAvailable(waffle.getType(), true).ifPresent(t -> {
+                    t.setStockCount(t.getStockCount() - 1);
+                    if (t.getStockCount() <= 0) t.setAvailable(false);
+                    waffleTypeRepository.save(t);
+                });
+                // Decrement waffle size stock
+                waffleSizeRepository.findByWaffleSizeAndIsAvailable(waffle.getSize(), true).ifPresent(s -> {
+                    s.setStockCount(s.getStockCount() - 1);
+                    if (s.getStockCount() <= 0) s.setAvailable(false);
+                    waffleSizeRepository.save(s);
+                });
             }
         }
     }

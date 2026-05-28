@@ -141,10 +141,10 @@ public class Menus {
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "1" + R + ")  None             " + A + "+$0.00" + B + "    ║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.00" + B + "    ║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.00" + B + "    ║");
-        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.00" + B + "    ║");
-        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry       " + A + "+$1.00" + B + "    ║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.50" + B + "    ║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.50" + B + "    ║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.50" + B + "    ║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry       " + A + "+$1.50" + B + "    ║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
@@ -322,8 +322,8 @@ public class Menus {
         System.out.println(B + "║  " + Bo + U + A + "SIZES" + R + B + "                                       ║");
         System.out.println(B + "╠══════════════════════════════════════════════╣");
         System.out.println(B + "║  " + R + "Mini                         " + A + "+$0.00" + R + "         " + B + "║");
-        System.out.println(B + "║  " + R + "Regular                      " + A + "+$1.00" + R + "         " + B + "║");
-        System.out.println(B + "║  " + R + "Large                        " + A + "+$2.00" + R + "         " + B + "║");
+        System.out.println(B + "║  " + R + "Regular                      " + A + "+$1.50" + R + "         " + B + "║");
+        System.out.println(B + "║  " + R + "Large                        " + A + "+$3.00" + R + "         " + B + "║");
 
         // Regular Toppings
         System.out.println(B + "╠══════════════════════════════════════════════╣");
