@@ -1,30 +1,30 @@
 package com.pluralsight.kendoughs_waffles.models.products;
 
-import com.pluralsight.kendoughs_waffles.models.enums.WaffleType;
+import com.pluralsight.kendoughs_waffles.models.enums.FillFlavor;
 import jakarta.persistence.*;
 
-// Marks this class as a JPA entity, mapping to the "waffle_types" table
+// Marks this class as a JPA entity, mapping to the "fill_flavors" table
 @Entity
-public class WaffleTypeEntity {
+public class FillFlavorEntity {
     // Primary key
     @Id
-    // Automatically generates a unique ID for each new waffle type
+    // Automatically generates a unique ID for each new fill flavor
     @GeneratedValue
     private int id;
 
     // Stores the enum value as a string inside the database
     @Enumerated(EnumType.STRING)
-    private WaffleType waffleType;
+    private FillFlavor fillFlavor;
 
     private int stockCount;
     private boolean isAvailable;
 
-    public WaffleTypeEntity(){
+    public FillFlavorEntity() {
 
     }
 
     public int getId() { return id; }
-    public WaffleType getWaffleType() { return waffleType; }
+    public FillFlavor getFillFlavor() { return fillFlavor; }
     public int getStockCount() { return stockCount; }
     public boolean isAvailable() { return isAvailable; }
     public void setStockCount(int stockCount) { this.stockCount = stockCount; }
