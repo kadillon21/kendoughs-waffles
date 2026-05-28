@@ -24,7 +24,8 @@ public class Waffle extends Product {
         this.fillFlavor = fillFlavor;
     }
 
-    public double calcPrice(){
+    @Override
+    public double getPrice(){
         double totalPrice = waffleSize.getPrice() + waffleType.getPrice() + fillFlavor.getPrice();
         for (Topping topping : toppings) {
             totalPrice += topping.getExtraCost();
@@ -74,4 +75,5 @@ public class Waffle extends Product {
     public void setFillFlavor(FillFlavor fillFlavor) {
         this.fillFlavor = fillFlavor;
     }
+
 }

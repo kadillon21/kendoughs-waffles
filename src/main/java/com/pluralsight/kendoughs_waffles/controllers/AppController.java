@@ -147,13 +147,13 @@ public class AppController {
 
     private void handleCustomWaffleMenu(Order order) {
         boolean onCustomWaffleMenu = true;
-        Waffle customWaffle = new Waffle("Custom Waffle", 0, null, null, new ArrayList<>(), FillFlavor.NONE);
+        Waffle customWaffle = new Waffle("Custom Waffle", 0, WaffleType.BUTTER_MILK, WaffleSize.REGULAR, new ArrayList<>(), FillFlavor.NONE);
         while (onCustomWaffleMenu){
-            Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings());
+            Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings(), customWaffle.getPrice());
             switch(UserInput.promptForChar("What would you like to do? ", "12345CX")){
-                case '1' -> customWaffle.setWaffleType(handleCustomWaffleTypeMenu(order));
-                case '2' -> customWaffle.setWaffleSize(handleCustomWaffleSizeMenu(order));
-                case '3' -> customWaffle.setFillFlavor(handleCustomWaffleFillFlavorMenu(order));
+                case '1' -> customWaffle.setWaffleType(handleCustomWaffleTypeMenu(order, customWaffle));
+                case '2' -> customWaffle.setWaffleSize(handleCustomWaffleSizeMenu(order, customWaffle));
+                case '3' -> customWaffle.setFillFlavor(handleCustomWaffleFillFlavorMenu(order, customWaffle));
                 case '4' -> customWaffle.getToppings().addAll(handleCustomWaffleToppingsMenu());
                 case '5' -> handleToppingRemovalMenu(customWaffle);
                 case 'C' -> {
@@ -165,7 +165,7 @@ public class AppController {
         }
     }
 
-    private WaffleType handleCustomWaffleTypeMenu(Order order) {
+    private WaffleType handleCustomWaffleTypeMenu(Order order, Waffle waffle) {
         Menus.customWaffleTypeMenu();
         return switch (UserInput.promptForChar("What would you like to do? ", "12345X")) {
             case '1' -> WaffleType.BUTTER_MILK;
@@ -173,22 +173,22 @@ public class AppController {
             case '3' -> WaffleType.LIEGE;
             case '4' -> WaffleType.CHURRO;
             case '5' -> WaffleType.RED_VELVET;
-            case 'X' -> null;
-            default -> handleCustomWaffleTypeMenu(order);
+            case 'X' -> waffle.getType();
+            default -> handleCustomWaffleTypeMenu(order, waffle);
         };
     }
-    private WaffleSize handleCustomWaffleSizeMenu(Order order) {
+    private WaffleSize handleCustomWaffleSizeMenu(Order order, Waffle waffle) {
         Menus.customWaffleSizeMenu();
         return switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
             case '1' -> WaffleSize.MINI;
             case '2' -> WaffleSize.REGULAR;
             case '3' -> WaffleSize.LARGE;
-            case 'X' -> null;
-            default -> handleCustomWaffleSizeMenu(order);
+            case 'X' -> waffle.getSize();
+            default -> handleCustomWaffleSizeMenu(order, waffle);
         };
     }
 
-    private FillFlavor handleCustomWaffleFillFlavorMenu(Order order) {
+    private FillFlavor handleCustomWaffleFillFlavorMenu(Order order, Waffle waffle) {
         Menus.customWaffleFillingMenu();
         return switch (UserInput.promptForChar("What type of filling do you want? ", "12345X")) {
             case '1' -> FillFlavor.NONE;
@@ -196,8 +196,8 @@ public class AppController {
             case '3' -> FillFlavor.CREAM_CHEESE;
             case '4' -> FillFlavor.JAM;
             case '5' -> FillFlavor.STRAWBERRY;
-            case 'X' -> null;
-            default -> handleCustomWaffleFillFlavorMenu(order);
+            case 'X' -> waffle.getFilling();
+            default -> handleCustomWaffleFillFlavorMenu(order, waffle);
         };
     }
 
@@ -238,11 +238,14 @@ public class AppController {
         boolean onToppingRemovalMenu = true;
         while (onToppingRemovalMenu) {
             Menus.removeToppingMenu(waffle.getToppings());
-            int chosenTopping = UserInput.promptForInt("Would you like to remove a topping? ", 0, waffle.getToppings().size());
-            if (chosenTopping <= waffle.getToppings().size()) {
-                waffle.getToppings().remove(chosenTopping - 1);
-            } if (chosenTopping == 0) {
+            char chosenTopping = UserInput.promptForChar("Would you like to remove a topping? ");
+
+            if (chosenTopping == 'X') {
                 onToppingRemovalMenu = false;
+            } else if (Character.isDigit(chosenTopping) && Character.getNumericValue(chosenTopping) <= waffle.getToppings().size()) {
+                waffle.getToppings().remove(Character.getNumericValue(chosenTopping) - 1);
+            } else {
+                System.out.println(ConsoleUtilities.DANGER + "Invalid choice." + ConsoleUtilities.RESET);
             }
         }
     }

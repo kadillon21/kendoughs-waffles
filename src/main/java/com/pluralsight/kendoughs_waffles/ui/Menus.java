@@ -68,10 +68,8 @@ public class Menus {
         System.out.println(B + "╚═════════════════════════════════╝" + R);
     }
 
-    public static void customWaffleMenu(WaffleType type, WaffleSize size, FillFlavor filling, List<Topping> toppings) {
+    public static void customWaffleMenu(WaffleType type, WaffleSize size, FillFlavor filling, List<Topping> toppings, double price) {
 
-        String typeDisplay    = type != null ? type.getLabel()           : "---";
-        String sizeDisplay    = size != null ? size.getLabel()           : "---";
         NumberFormat money = NumberFormat.getCurrencyInstance();
 
         System.out.println();
@@ -79,14 +77,16 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "       Build Your Waffle         " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Type:    " + R + typeDisplay + R + messagePadding("Type:    " + typeDisplay, 31) + B + "║");
-        System.out.println(B + "║  " + Bo + A + "Size:    " + R + sizeDisplay + R + messagePadding("Size:    " + R + sizeDisplay, 31) + B + "║");
-        System.out.println(B + "║  " + Bo + A + "Filling:    " + R + filling.label + R + messagePadding("Filling:    " + filling.label , 31)+ B + "║");
-        System.out.println(B + "║  " + Bo + A + "Toppings:" + R + "                        " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Type:        " + R + type + R + messagePadding("Type:    " + type, 27) + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Size:        " + R + size + R + messagePadding("Size:    " + size, 27) + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Filling:        " + R + filling.label + R + messagePadding("Filling:    " + filling.label , 34)+ B + "║");
+        System.out.println(B + "║  " + Bo + A + "Toppings:" + R + "                      " + B + "║");
         for (Topping topping : toppings){
-            String padding = messagePadding(money.format(topping.getLabel()) + "         " + money.format(topping.getPrice()), 31);
-            System.out.println(B + "║  " + R + "\t" + money.format(topping.getLabel()) + "         " + money.format(topping.getPrice()) + B + padding + "║");
+            String padding = messagePadding(topping.getLabel().toString(), 31);
+            System.out.println(B + "║  " + R + "\t" + topping.getLabel() + B + padding + "║");
         }
+        System.out.println(B + "║                                 ║");
+        System.out.println(B + "║  " + Bo + A + "Waffle Price        " + R + money.format(price) + messagePadding("Waffle Price        " + R + money.format(price) , 31) + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
@@ -107,11 +107,11 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "        Choose Your Type         " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + A + "1" + R + ")  Butter Milk      " + A + "$4.99" + R + "       " + B + "║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Belgian          " + A + "$5.49" + R + "       " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Liege            " + A + "$5.99" + R + "       " + B + "║");
-        System.out.println(B + "║  " + A + "4" + R + ")  Churro           " + A + "$5.99" + R + "       " + B + "║");
-        System.out.println(B + "║  " + A + "5" + R + ")  Red Velvet       " + A + "$6.49" + R + "       " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Butter Milk      " + A + "$4.99" + B + "     ║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Belgian          " + A + "$5.49" + B + "     ║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Liege            " + A + "$5.99" + B + "     ║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Churro           " + A + "$5.99" + B + "     ║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Red Velvet       " + A + "$6.49" + B + "     ║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
@@ -124,9 +124,9 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "        Choose Your Size         " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + A + "1" + R + ")  Mini             " + A + "+$0.00" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Regular          " + A + "+$1.50" + R + "      " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Large            " + A + "+$3.00" + R + "      " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Mini             " + A + "+$0.00" + B + "    ║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Regular          " + A + "+$1.50" + B + "    ║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Large            " + A + "+$3.00" + B + "    ║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
@@ -139,11 +139,11 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "        Choose Your Filling      " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + A + "1" + R + ")  None             " + A + "+$0.00" + R + "    " + B + "║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.00" + R + "    " + B + "║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.00" + R + "    " + B + "║");
-        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.00" + R + "    " + B + "║");
-        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry       " + A + "+$1.00" + R + "    " + B + "║");
+        System.out.println(B + "║  " + A + "1" + R + ")  None             " + A + "+$0.00" + B + "    ║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Nutella          " + A + "+$1.00" + B + "    ║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Cream Cheese     " + A + "+$1.00" + B + "    ║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Strawberry Jam   " + A + "+$1.00" + B + "    ║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Strawberry       " + A + "+$1.00" + B + "    ║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
@@ -157,21 +157,21 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "       Choose Toppings           " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Regular" + R + "  " + A + "+$0.50 each" + R + "          " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.WHIPPED_CREAM)   + A + "1"  + R + ")  Whipped Cream              " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.POWDERED_SUGAR)  + A + "2"  + R + ")  Powdered Sugar             " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.MAPLE_SYRUP)     + A + "3"  + R + ")  Maple Syrup                " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.CINNAMON)        + A + "4"  + R + ")  Cinnamon                   " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.BUTTER)          + A + "5"  + R + ")  Butter                     " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.CARAMEL_DRIZZLE) + A + "6"  + R + ")  Caramel Drizzle            " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Regular" + R + "  " + A + "+$0.50 each" + R + "           " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.WHIPPED_CREAM)   + A + "1"  + R + ")  Whipped Cream            " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.POWDERED_SUGAR)  + A + "2"  + R + ")  Powdered Sugar           " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.MAPLE_SYRUP)     + A + "3"  + R + ")  Maple Syrup              " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.CINNAMON)        + A + "4"  + R + ")  Cinnamon                 " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.BUTTER)          + A + "5"  + R + ")  Butter                   " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.CARAMEL_DRIZZLE) + A + "6"  + R + ")  Caramel Drizzle          " + B + "║");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + Bo + A + "Premium" + R + "  " + A + "+$1.00 each" + R + "          " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.NUTELLA)             + A + "7"  + R + ")  Nutella                    " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_STRAWBERRIES)  + A + "8"  + R + ")  Fresh Strawberries         " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.BACON_CRUMBLES)      + A + "9"  + R + ")  Bacon Crumbles             " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.ICE_CREAM)           + A + "10" + R + ") Ice Cream                  " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_BLUEBERRIES)   + A + "11" + R + ") Fresh Blueberries          " + B + "║");
-        System.out.println(B + "║  " + mark(selected, ToppingName.COOKIE_BUTTER)       + A + "12" + R + ") Cookie Butter              " + B + "║");
+        System.out.println(B + "║  " + Bo + A + "Premium" + R + "  " + A + "+$1.00 each" + R + "           " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.NUTELLA)             + A + "7"  + R + ")  Nutella                  " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_STRAWBERRIES)  + A + "8"  + R + ")  Fresh Strawberries       " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.BACON_CRUMBLES)      + A + "9"  + R + ")  Bacon Crumbles           " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.ICE_CREAM)           + A + "10" + R + ") Ice Cream                " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.FRESH_BLUEBERRIES)   + A + "11" + R + ") Fresh Blueberries        " + B + "║");
+        System.out.println(B + "║  " + mark(selected, ToppingName.COOKIE_BUTTER)       + A + "12" + R + ") Cookie Butter            " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "D" + R + ")  Done selecting             " + B + "║");
         System.out.println(B + "║                                 ║");
@@ -195,10 +195,11 @@ public class Menus {
         if (selected.isEmpty()) {
             System.out.println(B + "║  No toppings added yet.         " + B + "║");
         } else {
-            for (int i = 0; i < selected.size(); i++) {
-                String label = String.valueOf(selected.get(i).getLabel());
-                String line = String.format("%-29s", "  " + A + (i + 1) + R + ")  " + label);
-                System.out.println(B + "║" + line + B + "║");
+            int i = 0;
+            for (Topping topping : selected){
+                i++;
+                String padding = messagePadding(topping.getLabel().toString(), 27);
+                System.out.println(B + "║  " + R + "\t" + i + ") " + topping.getLabel() + B + padding + "║");
             }
         }
 
@@ -265,8 +266,8 @@ public class Menus {
         System.out.println(B + "║                                           ║");
 
         for (Product product : products){
-            String padding = messagePadding(money.format(product.getName()) + " - " + money.format(product.getPrice()), 31);
-            System.out.println(B + "║  " + R + money.format(product.getName()) + " - " + money.format(product.getPrice()) + B + padding + "║");
+            String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 31);
+            System.out.println(B + "║  " + R + product.getName() + " - " + money.format(product.getPrice()) + B + padding + "║");
         }
         System.out.println(B + "║                                           ║");
         System.out.println(B + "║  " + A + "1" + R + ")  Confirm Order                        " + B + "║");
@@ -376,8 +377,8 @@ public class Menus {
         System.out.println(B + "║  Enter the number of the item   " + B + "║");
         System.out.println(B + "║  you'd like to remove.          " + B + "║");
         for (Product product : products){
-            String padding = messagePadding(money.format(product.getName()) + " - " + money.format(product.getPrice()), 31);
-            System.out.println(B + "║  " + A + "1" + R + ") " + money.format(product.getName()) + " - " + money.format(product.getPrice()) + B + "          ║");
+            String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 31);
+            System.out.println(B + "║  " + A + "1" + R + ") " + product.getName() + " - " + money.format(product.getPrice()) + B + "          ║");
         }
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
@@ -394,8 +395,8 @@ public class Menus {
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
         for (Product product : products){
-            String padding = messagePadding(money.format(product.getName()) + " - " + money.format(product.getPrice()), 31);
-            System.out.println(B + "║  " + R + money.format(product.getName()) + " - " + money.format(product.getPrice()) + B + padding + "║");
+            String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 31);
+            System.out.println(B + "║  " + R + product.getName() + " - " + money.format(product.getPrice()) + B + padding + "║");
         }
         System.out.println(B + "║                                 ║");
         System.out.println(B + "║  " + A + "R" + R + ")  Remove Item                " + B + "║");
@@ -478,6 +479,6 @@ public class Menus {
             int padding = length - string.length();
             return " ".repeat(padding);
         }
-        return null;
+        return "";
     }
 }
