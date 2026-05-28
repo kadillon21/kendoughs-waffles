@@ -47,14 +47,14 @@ public class AppController {
         ConsoleUtilities.clearScreen();
         ConsoleUtilities.clearScreen("Loading...");
         boolean onMainMenu = true;
-        while(onMainMenu) {
+        while (onMainMenu) {
             Menus.mainMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
                 case '1' -> handleOrderMenu();
                 case '2' -> receiptLookUp();
-                case '3'-> Menus.displayStoreMenu();
+                case '3' -> Menus.displayStoreMenu();
                 case '4' -> Menus.displayAboutUs();
-                case 'X'-> {
+                case 'X' -> {
                     ConsoleUtilities.clearScreen("Exiting...");
                     onMainMenu = false;
                 }
@@ -64,7 +64,7 @@ public class AppController {
 
     // Method to look up a receipt by order number
     private void receiptLookUp() {
-        int userOrder = UserInput.promptForInt("What is your four digit order number? ",1,9999);
+        int userOrder = UserInput.promptForInt("What is your four digit order number? ", 1, 9999);
 
         File folder = new File("receipts");
         File[] listOfFiles = folder.listFiles();
@@ -103,7 +103,7 @@ public class AppController {
         Order order = new Order(1, "Kendall", "kadillon21@gmail.com", "773-383-8814", new ArrayList<>());
         getUserInformation(order);
         ConsoleUtilities.clearScreen("Saving user information...");
-        while(onOrderMenu) {
+        while (onOrderMenu) {
             Menus.orderMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123456X")) {
                 case '1' -> handleWaffleMenu(order);
@@ -111,7 +111,9 @@ public class AppController {
                 case '3' -> handleSideMenu(order);
                 case '4' -> handleViewCurrentOrder(order);
                 case '5' -> handleRemoveItemMenu(order);
-                case '6' -> {if (!handleCheckoutMenu(order)) onOrderMenu = false;}
+                case '6' -> {
+                    if (!handleCheckoutMenu(order)) onOrderMenu = false;
+                }
                 case 'X' -> {
                     ConsoleUtilities.clearScreen("Exiting order menu...");
                     onOrderMenu = false;
@@ -124,7 +126,7 @@ public class AppController {
     private void handleWaffleMenu(Order order) {
         ConsoleUtilities.clearScreen("Loading Waffle Menu...");
         boolean onWaffleMenu = true;
-        while(onWaffleMenu) {
+        while (onWaffleMenu) {
             Menus.waffleMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
                 case '1' -> {
@@ -144,7 +146,7 @@ public class AppController {
     private void handleDailySpecial(Order order) {
         ConsoleUtilities.clearScreen("Loading Daily Special Menu...");
         boolean onDailySpecial = true;
-        while (onDailySpecial){
+        while (onDailySpecial) {
             Menus.dailySpecialMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "123X")) {
                 case '1' -> {
@@ -167,9 +169,9 @@ public class AppController {
     private boolean handleSignatureWaffleMenu(Order order) {
         ConsoleUtilities.clearScreen("Loading Signature Waffle Menu...");
         boolean onSignatureWaffleMenu = true;
-        while (onSignatureWaffleMenu){
+        while (onSignatureWaffleMenu) {
             Menus.signatureWaffleMenu();
-            switch (UserInput.promptForChar("What would you like to do? ", "1234X")){
+            switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
                 case '1' -> {
                     order.addProduct(new ClassicKen());
                     onSignatureWaffleMenu = false;
@@ -197,9 +199,9 @@ public class AppController {
         ConsoleUtilities.clearScreen("Loading Custom Waffle Menu...");
         boolean onCustomWaffleMenu = true;
         Waffle customWaffle = new Waffle("Custom Waffle", 0, WaffleType.BUTTER_MILK, WaffleSize.REGULAR, new ArrayList<>(), FillFlavor.NONE);
-        while (onCustomWaffleMenu){
+        while (onCustomWaffleMenu) {
             Menus.customWaffleMenu(customWaffle.getType(), customWaffle.getSize(), customWaffle.getFilling(), customWaffle.getToppings(), customWaffle.getPrice());
-            switch(UserInput.promptForChar("What would you like to do? ", "12345CX")){
+            switch (UserInput.promptForChar("What would you like to do? ", "12345CX")) {
                 case '1' -> {
                     customWaffle.setWaffleType(handleCustomWaffleTypeMenu(order, customWaffle));
                     ConsoleUtilities.clearScreen("Adding...");
@@ -280,18 +282,18 @@ public class AppController {
         boolean onCustomWaffleToppingsMenu = true;
         ArrayList<Topping> toppings = new ArrayList<>();
         String[] validMenuOptions = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "D"};
-        while(onCustomWaffleToppingsMenu) {
+        while (onCustomWaffleToppingsMenu) {
             Menus.customWaffleToppingsMenu(toppings);
-            switch (UserInput.promptForString("What toppings would you like? ", validMenuOptions)){
-                case "1"  -> addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
-                case "2"  -> addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
-                case "3"  -> addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
-                case "4"  -> addToppingToList(toppings, ToppingName.CINNAMON);
-                case "5"  -> addToppingToList(toppings, ToppingName.BUTTER);
-                case "6"  -> addToppingToList(toppings, ToppingName.CARAMEL_DRIZZLE);
-                case "7"  -> addToppingToList(toppings, ToppingName.NUTELLA);
-                case "8"  -> addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
-                case "9"  -> addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
+            switch (UserInput.promptForString("What toppings would you like? ", validMenuOptions)) {
+                case "1" -> addToppingToList(toppings, ToppingName.WHIPPED_CREAM);
+                case "2" -> addToppingToList(toppings, ToppingName.POWDERED_SUGAR);
+                case "3" -> addToppingToList(toppings, ToppingName.MAPLE_SYRUP);
+                case "4" -> addToppingToList(toppings, ToppingName.CINNAMON);
+                case "5" -> addToppingToList(toppings, ToppingName.BUTTER);
+                case "6" -> addToppingToList(toppings, ToppingName.CARAMEL_DRIZZLE);
+                case "7" -> addToppingToList(toppings, ToppingName.NUTELLA);
+                case "8" -> addToppingToList(toppings, ToppingName.FRESH_STRAWBERRIES);
+                case "9" -> addToppingToList(toppings, ToppingName.BACON_CRUMBLES);
                 case "10" -> addToppingToList(toppings, ToppingName.ICE_CREAM);
                 case "11" -> addToppingToList(toppings, ToppingName.FRESH_BLUEBERRIES);
                 case "12" -> addToppingToList(toppings, ToppingName.COOKIE_BUTTER);
@@ -395,7 +397,7 @@ public class AppController {
     private void handleSideMenu(Order order) {
         ConsoleUtilities.clearScreen("Loading Side Menu...");
         boolean onSideMenu = true;
-        while(onSideMenu) {
+        while (onSideMenu) {
             Menus.sideMenu();
             switch (UserInput.promptForChar("What would you like to do? ", "1234X")) {
                 case '1' -> {
@@ -433,7 +435,7 @@ public class AppController {
     private void handleViewCurrentOrder(Order order) {
         ConsoleUtilities.clearScreen("Loading View Current Order Menu...");
         boolean onViewCurrentOrder = true;
-        while(onViewCurrentOrder) {
+        while (onViewCurrentOrder) {
             Menus.viewCurrentOrder(order);
             switch (UserInput.promptForChar("What would you like to do? ", "RX")) {
                 case 'R' -> {
@@ -470,7 +472,7 @@ public class AppController {
     private boolean handleCheckoutMenu(Order order) throws IOException {
         ConsoleUtilities.clearScreen("Loading Checkout Menu...");
         boolean onCheckoutMenu = true;
-        while(onCheckoutMenu) {
+        while (onCheckoutMenu) {
             Menus.checkoutMenu(order);
             switch (UserInput.promptForChar("What would you like to do? ", "CBX")) {
                 case 'C' -> {

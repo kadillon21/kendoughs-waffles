@@ -1,6 +1,7 @@
 package com.pluralsight.kendoughs_waffles.models.enums;
 
 public enum DrinkFlavor {
+    // enum values
     COFFEE("Coffee"),
     OJ("Orange Juice"),
     MILK("Milk"),
@@ -8,12 +9,15 @@ public enum DrinkFlavor {
     APPLE_JUICE("Apple Juice"),
     CRANBERRY_JUICE("Cranberry Juice");
 
+    // declared label for enum values
     private final String label;
 
+    // constructor
     DrinkFlavor(String label) {
         this.label = label;
     }
 
+    // method to get label
     public String getLabel() {
         return label;
     }

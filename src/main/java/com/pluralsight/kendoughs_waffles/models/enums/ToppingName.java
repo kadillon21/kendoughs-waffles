@@ -1,6 +1,7 @@
 package com.pluralsight.kendoughs_waffles.models.enums;
 
 public enum ToppingName {
+    // Enum values
     // Regular toppings
     WHIPPED_CREAM("Whipped Cream"),
     POWDERED_SUGAR("Powdered Sugar"),
@@ -16,12 +17,15 @@ public enum ToppingName {
     FRESH_BLUEBERRIES("Fresh Blueberries"),
     COOKIE_BUTTER("Cookie Butter");
 
+    // Declared label for enum values
     private final String label;
 
+    // Constructor
     ToppingName(String label) {
         this.label = label;
     }
 
+    // Method to get label
     public String getLabel() {
         return label;
     }
