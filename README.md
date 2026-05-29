@@ -231,7 +231,7 @@ The app also exposes a small REST layer (Spring Web) for programmatic access to 
 
 > 📐 Visual Diagram
 >
-> ![Class Diagram](docs/diagrams/class-diagram.png)
+> ![Class Diagram](docs/screenshots/diagram.png)
 > 
 > 
 
