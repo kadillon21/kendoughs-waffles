@@ -44,7 +44,7 @@ This is my **Capstone 2** project for Year Up United.
 
 ## Screenshots
 
-> 📸 _Add your screenshots to a `docs/screenshots/` folder in the repo and update the links below._
+> 📸 _Preview of the app's main menu and checkout flow._
 
 | Main Menu | Build Your Waffle |
 |-----------|-------------------|
