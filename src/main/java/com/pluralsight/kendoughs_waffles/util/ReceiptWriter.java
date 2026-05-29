@@ -78,7 +78,7 @@ public class ReceiptWriter {
             writer.write("Visa " + cardNumber + "\n\n");
             writer.write("Order Summary\n");
             for (OrderItemRequest item : order.getItems()) {
-                writer.write(item.getName() + " - $" + money.format(item.getPrice()) + "\n");
+                writer.write(item.getName() + " - " + money.format(item.getPrice()) + "\n");
             }
             writer.write("\n");
             writer.write("Subtotal: " + money.format(subtotal) + "\n");

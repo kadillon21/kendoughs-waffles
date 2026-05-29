@@ -20,6 +20,6 @@ public class RegularTopping extends Topping {
 
     @Override
     public double getExtraCost() {
-        return 0;
+        return .5;
     }
 }

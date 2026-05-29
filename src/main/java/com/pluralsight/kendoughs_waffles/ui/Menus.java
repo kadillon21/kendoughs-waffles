@@ -200,7 +200,7 @@ public class Menus {
             int i = 0;
             for (Topping topping : selected) {
                 i++;
-                String padding = messagePadding(topping.getLabel().toString(), 22);
+                String padding = messagePadding(topping.getLabel().toString(), 23);
                 System.out.println(B + "║  " + R + "\t" + i + ") " + topping.getLabel() + B + padding + "║");
             }
         }
@@ -217,12 +217,12 @@ public class Menus {
         System.out.println(B + "║" + Bo + U + R + "           Drink Menu            " + R + B + "║");
         System.out.println(B + "╠═════════════════════════════════╣");
         System.out.println(B + "║                                 ║");
-        System.out.println(B + "║  " + A + "1" + R + ")  Coffee           " + A + "$2.99" + B + "     ║");
-        System.out.println(B + "║  " + A + "2" + R + ")  Orange Juice     " + A + "$2.99" + B + "     ║");
-        System.out.println(B + "║  " + A + "3" + R + ")  Milk             " + A + "$1.99" + B + "     ║");
-        System.out.println(B + "║  " + A + "4" + R + ")  Lemonade         " + A + "$2.49" + B + "     ║");
-        System.out.println(B + "║  " + A + "5" + R + ")  Apple Juice      " + A + "$2.49" + B + "     ║");
-        System.out.println(B + "║  " + A + "6" + R + ")  Cranberry Juice  " + A + "$2.49" + B + "     ║");
+        System.out.println(B + "║  " + A + "1" + R + ")  Coffee                     "  + B + "║");
+        System.out.println(B + "║  " + A + "2" + R + ")  Orange Juice               "  + B + "║");
+        System.out.println(B + "║  " + A + "3" + R + ")  Milk                       "  + B + "║");
+        System.out.println(B + "║  " + A + "4" + R + ")  Lemonade                   "  + B + "║");
+        System.out.println(B + "║  " + A + "5" + R + ")  Apple Juice                "  + B + "║");
+        System.out.println(B + "║  " + A + "6" + R + ")  Cranberry Juice            " + B + "║");
         System.out.println(B + "║  " + A + "X" + R + ")  Go Back                    " + B + "║");
         System.out.println(B + "║                                 ║");
         System.out.println(B + "╚═════════════════════════════════╝" + R);
@@ -261,6 +261,7 @@ public class Menus {
     public static void checkoutMenu(Order order) {
         List<Product> products = order.getProducts();
         NumberFormat money = NumberFormat.getCurrencyInstance();
+        double total = order.calcTotal();
         System.out.println();
         System.out.println(B + "╔═══════════════════════════════════════════╗");
         System.out.println(B + "║" + Bo + U + R + "              Order Summary                " + R + B + "║");
@@ -271,6 +272,9 @@ public class Menus {
             String padding = messagePadding(product.getName() + " - " + money.format(product.getPrice()), 41);
             System.out.println(B + "║  " + R + product.getName() + " - " + money.format(product.getPrice()) + B + padding + "║");
         }
+        System.out.println(B + "║                                           ║");
+        String padding = messagePadding("  Total:  " + R + money.format(total), 47);
+        System.out.println(B + "║" + A +"  Total:  " + R + money.format(total) + padding + B + "║");
         System.out.println(B + "║                                           ║");
         System.out.println(B + "║  " + A + "C" + R + ")  Confirm Order                        " + B + "║");
         System.out.println(B + "║  " + A + "B" + R + ")  Go Back                              " + B + "║");

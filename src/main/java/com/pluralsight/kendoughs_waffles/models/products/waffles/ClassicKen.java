@@ -16,7 +16,7 @@ public class ClassicKen extends SignatureWaffle {
     public ClassicKen(List<Topping> toppings) {
         super(
                 "The Classic Ken",
-                12.99,
+                6.49,
                 WaffleType.BUTTER_MILK,
                 WaffleSize.REGULAR,
                 new ArrayList<>(),

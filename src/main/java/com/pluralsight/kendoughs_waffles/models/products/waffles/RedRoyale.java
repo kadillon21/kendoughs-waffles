@@ -15,7 +15,7 @@ public class RedRoyale extends SignatureWaffle {
     public RedRoyale(List<Topping> toppings) {
         super(
                 "The Red Royale",
-                12.99,
+                10.99,
                 WaffleType.RED_VELVET,
                 WaffleSize.REGULAR,
                 new ArrayList<>(),

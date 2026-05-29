@@ -16,7 +16,7 @@ public class Sunrise extends SignatureWaffle {
     public Sunrise(List<Topping> toppings) {
         super(
                 "The Sunrise",
-                12.99,
+                8.49,
                 WaffleType.CHURRO,
                 WaffleSize.REGULAR,
                 new ArrayList<>(),

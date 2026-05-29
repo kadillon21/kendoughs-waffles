@@ -15,7 +15,7 @@ public class NutellaDream extends SignatureWaffle {
     public NutellaDream(List<Topping> toppings) {
         super(
                 "The Nutella Dream",
-                12.99,
+                8.99,
                 WaffleType.BELGIAN,
                 WaffleSize.REGULAR,
                 new ArrayList<>(),
