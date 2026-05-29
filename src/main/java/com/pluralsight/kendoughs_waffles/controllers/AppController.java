@@ -93,7 +93,10 @@ public class AppController {
                         boolean viewingReceipt = true;
                         while (viewingReceipt) {
                             switch (UserInput.promptForChar("Press X to return to the main menu ")) {
-                                case 'X' -> viewingReceipt = false;
+                                case 'X' -> {
+                                    ConsoleUtilities.clearScreen("Returning to main menu...");
+                                    viewingReceipt = false;
+                                }
                                 default ->
                                         System.out.println(ConsoleUtilities.DANGER + "Invalid input. Please enter X to return to the main menu." + ConsoleUtilities.RESET);
                             }
